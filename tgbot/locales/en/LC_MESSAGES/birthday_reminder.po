@@ -1,0 +1,514 @@
+# English translations for PROJECT.
+# Copyright (C) 2022 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2022-06-27 15:45+0700\n"
+"PO-Revision-Date: 2022-06-20 13:36+0700\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: keyboards.py:12
+msgid "Добавить"
+msgstr "Add person"
+
+#: keyboards.py:15 keyboards.py:134
+msgid "Смотреть список"
+msgstr "List of Birthdays"
+
+#: keyboards.py:18
+msgid "Выбрать язык"
+msgstr "Set language"
+
+#: keyboards.py:28 keyboards.py:42 keyboards.py:60 keyboards.py:74
+#: keyboards.py:124
+msgid "< Назад"
+msgstr "< Back"
+
+#: keyboards.py:29 keyboards.py:43 keyboards.py:61 keyboards.py:75
+#: keyboards.py:85 keyboards.py:99 keyboards.py:125 keyboards.py:135
+msgid "Главное меню"
+msgstr "Main menu"
+
+#: keyboards.py:39
+msgid "Пропустить"
+msgstr "Skip"
+
+#: keyboards.py:53
+msgid "В день рождения"
+msgstr "On birthday"
+
+#: keyboards.py:54
+msgid "За три дня"
+msgstr "3 days before"
+
+#: keyboards.py:57
+msgid "Выбрать оба варинта"
+msgstr "Choose both options"
+
+#: keyboards.py:71
+msgid "Все верно"
+msgstr "Confirm"
+
+#: keyboards.py:95
+msgid "Удалить запись"
+msgstr "Delete person"
+
+#: keyboards.py:96
+msgid "Редактировать запись"
+msgstr "Edit person"
+
+#: keyboards.py:119
+msgid "Имя"
+msgstr "Name"
+
+#: keyboards.py:120
+msgid "Дата"
+msgstr "Date"
+
+#: keyboards.py:121
+msgid "Уведомление"
+msgstr "Reminder"
+
+#: handlers/user.py:24
+msgid "января"
+msgstr "of January"
+
+#: handlers/user.py:24
+msgid "февраля"
+msgstr "of February"
+
+#: handlers/user.py:24
+msgid "марта"
+msgstr "of March"
+
+#: handlers/user.py:24
+msgid "апреля"
+msgstr "of April"
+
+#: handlers/user.py:24
+msgid "мая"
+msgstr "of May"
+
+#: handlers/user.py:24
+msgid "июня"
+msgstr "of June"
+
+#: handlers/user.py:24
+msgid "июля"
+msgstr "of July"
+
+#: handlers/user.py:25
+msgid "августа"
+msgstr "of August"
+
+#: handlers/user.py:25
+msgid "сентября"
+msgstr "of September"
+
+#: handlers/user.py:25
+msgid "октября"
+msgstr "of October"
+
+#: handlers/user.py:25
+msgid "ноября"
+msgstr "of November"
+
+#: handlers/user.py:25
+msgid "декабря"
+msgstr "of December"
+
+#: handlers/user.py:30
+msgid ""
+"Добро пожаловать в <b>Birthday Reminder!</b>\n"
+"\n"
+"Добавьте человека, указав его имя и дату рождения.\n"
+"Бот напомнит Вам когда наступит его День Рождения.\n"
+msgstr ""
+"Welcome to <b>Birthday Reminder!</b>\n"
+"\n"
+"Add a person specifying his name and date of birth.\n"
+"The bot will remind you when his birthday comes.\n"
+
+#: handlers/user.py:48
+msgid "Выберите удобный для Вас язык"
+msgstr "Choose a language that is convenient for you"
+
+#: handlers/user.py:64
+msgid "Русский язык установлен"
+msgstr "English language is set"
+
+#: handlers/user.py:72
+msgid ""
+"Введите имя человека, которого хотите добавить в список дней рождений.\n"
+"Например: <b>Олег(автосервис)</b>"
+msgstr ""
+"Enter the name of the person you want to add to the list of birthdays.\n"
+"For example: <b>Mike(plumber)</b>"
+
+#: handlers/user.py:81
+msgid "Такое имя уже есть в Вашем списке. Введите, пожалуйста, уникальное имя."
+msgstr "This name is already on your list. Please enter a unique name."
+
+#: handlers/user.py:82
+msgid ""
+"Вы ввели имя: <b>{name}</b>\n"
+"\n"
+"Теперь введите число и месяц рождения.\n"
+"Например: <b>19.01</b>"
+msgstr ""
+"You specified name: <b>{name}</b>\n"
+"\n"
+"Now enter the date and month of birth.\n"
+"For example: <b>19.01</b>"
+
+#: handlers/user.py:107
+msgid ""
+"Вы ввели имя: <b>{name}</b>\n"
+"Вы ввели дату: <b>{day} {month}</b>\n"
+"\n"
+"Теперь введите год рождения.\n"
+"Например: <b>1990</b>"
+msgstr ""
+"You specified name: <b>{name}</b>\n"
+"You specified date: <b>{day} {month}</b>\n"
+"\n"
+"Now enter the year of birth.\n"
+"For example: <b>1990</b>"
+
+#: handlers/user.py:113 handlers/user.py:396
+msgid ""
+"Вы ввели несуществующую дату.\n"
+"Введите пожалуйста число и месяц в формате <b>дд.мм</b>.\n"
+"Например <b>19.01</b>"
+msgstr ""
+"You entered a non-existent date.\n"
+"Please enter the date and month in <b>dd.mm</b> format.\n"
+"For example: <b>19.01</b>"
+
+#: handlers/user.py:140
+msgid ""
+"Вы ввели имя: <b>{name}</b>\n"
+"Вы ввели дату: <b>{day} {month}</b>\n"
+"Вы ввели год: <b>{year}</b>\n"
+"\n"
+"Теперь выберите когда напоминать Вам о день рождении {name}:"
+msgstr ""
+"You specified name: <b>{name}</b>\n"
+"You specified date: <b>{day} {month}</b>\n"
+"You specified year: <b>{year}</b>\n"
+"\n"
+"Now choose when to remind you of {name}'s birthday:"
+
+#: handlers/user.py:146
+msgid ""
+"Год рождения не может быть больше текущего года.\n"
+"Введите корректный год рождения.\n"
+"Например: <b>1990</b>"
+msgstr ""
+"The year of birth cannot be greater than the current year.\n"
+"Enter the correct year of birth.\n"
+"For example: <b>1990</b>"
+
+#: handlers/user.py:150
+msgid ""
+"Не правильный формат ввода.\n"
+"Введите год рождения в формате <b>гггг</b>.\n"
+"Например: <b>1990</b>"
+msgstr ""
+"The input format is not correct.\n"
+"Please enter the year in <b>yyyy</b> format.\n"
+"For example: <b>1990</b>"
+
+#: handlers/user.py:186
+msgid ""
+"Давайте проверим:\n"
+"\n"
+"Вы ввели имя: <b>{name}</b>\n"
+"Вы ввели дату: <b>{day} {month}</b>\n"
+"Вы ввели год: <b>{year}</b>\n"
+"\n"
+"Напоминать:\n"
+"<b>{notification}</b>\n"
+"\n"
+"Нажмите кнопку 'Все верно' и я буду каждый год напоминать Вам о день "
+"рождении {name}"
+msgstr ""
+"Let's check it out:\n"
+"\n"
+"You specified name: <b>{name}</b>\n"
+"You specified date: <b>{day} {month}</b>\n"
+"You specified year: <b>{year}</b>\n"
+"\n"
+"Remind:\n"
+"<b>{notification}</b>\n"
+"\n"
+"Click the 'Confirm' and I will remind you about {name}'s birthday every "
+"year"
+
+#: handlers/user.py:197 handlers/user.py:463
+msgid "- в День рождения в 9:00"
+msgstr "- on Birthday at 9:00"
+
+#: handlers/user.py:199 handlers/user.py:465
+msgid "- за три дня до дня рождения"
+msgstr "- 3 days before the birthday"
+
+#: handlers/user.py:201 handlers/user.py:467
+msgid ""
+"- в День рождения в 9:00\n"
+"- за 3 дня до Дня рождения"
+msgstr ""
+"- on Birthday at 9:00\n"
+"- 3 days before the birthday"
+
+#: handlers/user.py:225
+msgid "<b>Отлично! Напоминание добавлено!</b>"
+msgstr "<b>Great! Reminder added!</b>"
+
+#: handlers/user.py:241
+msgid "<b>Ваш список дней рождений:</b>\n"
+msgstr "<b>Your list of Birthdays:</b>\n"
+
+#: handlers/user.py:242
+msgid ""
+"\n"
+"<b>Январь</b>\n"
+msgstr ""
+"\n"
+"<b>January</b>\n"
+
+#: handlers/user.py:242
+msgid ""
+"\n"
+"<b>Февраль</b>\n"
+msgstr ""
+"\n"
+"<b>February</b>\n"
+
+#: handlers/user.py:242
+msgid ""
+"\n"
+"<b>Март</b>\n"
+msgstr ""
+"\n"
+"<b>March</b>\n"
+
+#: handlers/user.py:242
+msgid ""
+"\n"
+"<b>Апрель</b>\n"
+msgstr ""
+"\n"
+"<b>April</b>\n"
+
+#: handlers/user.py:242
+msgid ""
+"\n"
+"<b>Май</b>\n"
+msgstr ""
+"\n"
+"<b>May</b>\n"
+
+#: handlers/user.py:242
+msgid ""
+"\n"
+"<b>Июнь</b>\n"
+msgstr ""
+"\n"
+"<b>June</b>\n"
+
+#: handlers/user.py:242
+msgid ""
+"\n"
+"<b>Июль</b>\n"
+msgstr ""
+"\n"
+"<b>July</b>\n"
+
+#: handlers/user.py:242
+msgid ""
+"\n"
+"<b>Август</b>\n"
+msgstr ""
+"\n"
+"<b>August</b>\n"
+
+#: handlers/user.py:242
+msgid ""
+"\n"
+"<b>Сентябрь</b>\n"
+msgstr ""
+"\n"
+"<b>September</b>\n"
+
+#: handlers/user.py:242
+msgid ""
+"\n"
+"<b>Октябрь</b>\n"
+msgstr ""
+"\n"
+"<b>October</b>\n"
+
+#: handlers/user.py:242
+msgid ""
+"\n"
+"<b>Ноябрь</b>\n"
+msgstr ""
+"\n"
+"<b>November</b>\n"
+
+#: handlers/user.py:242
+msgid ""
+"\n"
+"<b>Декабрь</b>\n"
+msgstr ""
+"\n"
+"<b>December</b>\n"
+
+#: handlers/user.py:243
+msgid ""
+"\n"
+"<i>*Кликните по имени, чтобы скопировать</i>"
+msgstr ""
+"\n"
+"<i>*Tap on a name to copy</i>"
+
+#: handlers/user.py:273
+msgid "Введите имя человека, которого хотите удалить из списка"
+msgstr "Enter the person's name you want to delete from the list of birthdays"
+
+#: handlers/user.py:282
+msgid ""
+"Вы действительно хотите удалить запись со следующими данными:\n"
+"\n"
+msgstr ""
+"Are you sure you want to delete the person:\n"
+"\n"
+
+#: handlers/user.py:284 handlers/user.py:327
+msgid ""
+"Такого имени нет в списке, проверьте правильность написания и введите имя"
+" еще раз:"
+msgstr "This name is not in the list, check the spelling and enter the name again:"
+
+#: handlers/user.py:304
+msgid "Напоминание о День рождении <b>{name}</b> удалено."
+msgstr "<b>{name}</b>'s birthday reminder deleted."
+
+#: handlers/user.py:316
+msgid "Введите имя человека, данные которого вы хотите отредактировать"
+msgstr "Enter the name of the person you want to edit"
+
+#: handlers/user.py:325
+msgid ""
+"Вы выбрали запись:\n"
+"\n"
+msgstr ""
+"You have chosen:\n"
+"\n"
+
+#: handlers/user.py:328
+msgid "Выберите какие данные Вы хотели бы изменить:"
+msgstr "Choose what you'd like to change:"
+
+#: handlers/user.py:357
+msgid "Введите новое имя"
+msgstr "Enter a new name"
+
+#: handlers/user.py:366
+msgid ""
+"Вы действительно хотите изменить имя <b>{old_name}</b> на имя "
+"<b>{new_name}</b>?\n"
+"\n"
+msgstr ""
+"Are you sure you want to change the name <b>{old_name}</b> to the name "
+"<b>{new_name}</b>?\n"
+"\n"
+
+#: handlers/user.py:368
+msgid "Такое имя уже есть в Вашем списке. Введите уникальное имя."
+msgstr "This name is already on your list. Please enter a unique name."
+
+#: handlers/user.py:382
+msgid ""
+"Введите новые число и месяц.\n"
+"Например: <b>19.01</b>"
+msgstr ""
+"Enter a new date and a new month of birth.\n"
+"For example: <b>19.01</b>"
+
+#: handlers/user.py:391
+msgid ""
+"Вы ввели новую дату: <b>{new_day} {new_month}</b>\n"
+"\n"
+"Теперь введите новый год рождения.\n"
+"Например: <b>1990</b>"
+msgstr ""
+"You specified the new date: <b>{new_day} {new_month}</b>\n"
+"\n"
+"Now enter a new year of birth.\n"
+"For example: <b>1990</b>"
+
+#: handlers/user.py:420
+msgid ""
+"Вы действительно хотите изменить дату рождения <b>{old_name}</b> на "
+"<b>{new_day}.{new_month}.{new_year}</b>?\n"
+"\n"
+msgstr ""
+"Are you sure you want to change the <b>{old_name}</b>'s date of birth to "
+"<b>{new_day}.{new_month}.{new_year}</b>?\n"
+"\n"
+
+#: handlers/user.py:422
+msgid ""
+"Вы действительно хотите изменить дату рождения <b>{old_name}</b> на "
+"<b>{new_day}.{new_month}</b>?\n"
+"\n"
+msgstr ""
+"Are you sure you want to change the <b>{old_name}</b>'s date of birth to "
+"<b>{new_day}.{new_month}</b>?\n"
+"\n"
+
+#: handlers/user.py:447
+msgid "Выберите когда напоминать Вам о день рождении {old_name}:"
+msgstr "Choose when to remind you of the {old_name}'s Birthday:"
+
+#: handlers/user.py:458
+msgid ""
+"Теперь бот будет напоминать Вам о день рождении <b>{old_name}</b>:\n"
+"<b>{notification}</b>\n"
+"\n"
+"\n"
+"Нажмите кнопку 'Все верно', чтобы сохранить данные изменения."
+msgstr ""
+"Now the bot will remind you of the<b>{old_name}</b>'s Birthday:\n"
+"<b>{notification}</b>\n"
+"\n"
+"\n"
+"Tap 'Confirm' to complete changes."
+
+#: handlers/user.py:489 handlers/user.py:502 handlers/user.py:516
+msgid "<b>Изменения успешно внесены</b>"
+msgstr "Changes saved"
+
+#~ msgid "Both options"
+#~ msgstr "Both options"
+
+#~ msgid ""
+#~ "<b>Отлично! Напоминание добавлено!\n"
+#~ "</b>"
+#~ msgstr ""
+#~ "<b>Great! Reminder added!\n"
+#~ "</b>"
+
