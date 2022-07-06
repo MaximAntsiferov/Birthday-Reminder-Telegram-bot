@@ -48,7 +48,7 @@ async def create_tables():
 
 
 # Запрос языка из БД
-async def get_lang_from_db(user_id: int) -> str | None:
+async def get_lang_from_db(user_id: int) -> str:
     connection = await connection_to_db()
     value = await connection.fetch(f"SELECT lang FROM languages WHERE user_id='{user_id}'")
     await close_connection(connection)
