@@ -3,10 +3,10 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import CommandStart
 from aiogram.types import Message, CallbackQuery
 
-from filters import MainMenuFilter, ChooseLanguageFilter, SetLanguageFilter
-from keyboards import main_menu_keyboard, choose_language_keyboard, main_menu_button
-from middlewares.language_middleware import i18n, _
-from db import set_lang_to_db
+from tgbot.filters import MainMenuFilter, ChooseLanguageFilter, SetLanguageFilter
+from tgbot.keyboards import main_menu_keyboard, choose_language_keyboard, main_menu_button
+from tgbot.middlewares.language_middleware import i18n, _
+from tgbot.db import set_lang_to_db
 
 
 # Хэндлер для команды "/start" и кнопки "Главное меню"

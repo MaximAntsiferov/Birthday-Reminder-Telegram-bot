@@ -1,4 +1,3 @@
-import logging
 from datetime import date, timedelta
 from aiogram import Bot
 from apscheduler.schedulers.asyncio import AsyncIOScheduler

@@ -3,15 +3,15 @@ from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery, Message
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
-from filters import BackMenuFilter, AddNoteFilter, ChooseNotificationFilter, ApproveDataFilter, SkipFilter
-from keyboards import main_menu_button, back_or_main_keyboard, add_year_keyboard, add_notification_keyboard, \
+from tgbot.filters import BackMenuFilter, AddNoteFilter, ChooseNotificationFilter, ApproveDataFilter, SkipFilter
+from tgbot.keyboards import main_menu_button, back_or_main_keyboard, add_year_keyboard, add_notification_keyboard, \
     approving_keyboard
-from middlewares.language_middleware import _
-from misc.check_date_format import correct_date_format, correct_year_format, lower_than_current
-from misc.notification_views import long_notification
-from misc.numbers_to_months import months
-from misc.states import AddPersonStates
-from db import exist_in_db, add_person_to_db
+from tgbot.middlewares.language_middleware import _
+from tgbot.misc.check_date_format import correct_date_format, correct_year_format, lower_than_current
+from tgbot.misc.notification_views import long_notification
+from tgbot.misc.numbers_to_months import months
+from tgbot.misc.states import AddPersonStates
+from tgbot.db import exist_in_db, add_person_to_db
 
 
 # Хэндлер для кнопки "Добавить"

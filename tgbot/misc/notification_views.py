@@ -1,8 +1,4 @@
-from middlewares.language_middleware import i18n
-
-
-# Функция для извлечения текста и перевода на английский язык, если такой выбран пользователем
-_ = i18n.gettext
+from tgbot.middlewares.language_middleware import _
 
 
 # Функция определяет как будут выглядеть короткие и длинные варианты типов напоминаний
@@ -26,4 +22,3 @@ async def long_notification(notification: str):
         return _("- в День рождения в 9:00\n- за 3 дня до Дня рождения")
     else:
         return
-

@@ -1,4 +1,4 @@
-from middlewares.language_middleware import _
+from tgbot.middlewares.language_middleware import _
 
 
 # Словарь соответствия месяцев их порядковому номеру в календаре

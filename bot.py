@@ -5,21 +5,21 @@ from aiogram import Bot, Dispatcher
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
-from handlers.add_person_handlers import reg_add_person_handlers
-from handlers.basic_handlers import reg_basic_handlers
-from handlers.inside_the_list.del_person_handlers import reg_del_person_handlers
-from handlers.inside_the_list.inside_editing.edit_date_handlers import reg_edit_date_handlers
-from handlers.inside_the_list.inside_editing.edit_name_handlers import reg_edit_name_handlers
-from handlers.inside_the_list.inside_editing.edit_notification_handlers import reg_edit_notification_handlers
-from handlers.inside_the_list.edit_person_handlers import reg_edit_person_handlers
-from handlers.look_at_list_handler import reg_look_at_list_handler
-from middlewares.language_middleware import reg_language_middleware
-from middlewares.scheduler_middleware import reg_scheduler_middleware
-from scheduler import tasks_on_startup
+from tgbot.commands import set_my_default_commands
 from tgbot.config import BOT_TOKEN
+from tgbot.db import create_tables
 from tgbot.filters import register_all_filters
-from db import create_tables
-from commands import set_my_default_commands
+from tgbot.handlers.add_person_handlers import reg_add_person_handlers
+from tgbot.handlers.basic_handlers import reg_basic_handlers
+from tgbot.handlers.inside_the_list.del_person_handlers import reg_del_person_handlers
+from tgbot.handlers.inside_the_list.edit_person_handlers import reg_edit_person_handlers
+from tgbot.handlers.inside_the_list.inside_editing.edit_date_handlers import reg_edit_date_handlers
+from tgbot.handlers.inside_the_list.inside_editing.edit_name_handlers import reg_edit_name_handlers
+from tgbot.handlers.inside_the_list.inside_editing.edit_notification_handlers import reg_edit_notification_handlers
+from tgbot.handlers.look_at_list_handler import reg_look_at_list_handler
+from tgbot.middlewares.language_middleware import reg_language_middleware
+from tgbot.middlewares.scheduler_middleware import reg_scheduler_middleware
+from tgbot.scheduler import tasks_on_startup
 
 logger = logging.getLogger(__name__)
 

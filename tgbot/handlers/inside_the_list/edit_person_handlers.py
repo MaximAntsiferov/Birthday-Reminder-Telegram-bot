@@ -2,9 +2,9 @@ from aiogram import Dispatcher
 from aiogram.dispatcher import FSMContext
 from aiogram.types import Message, CallbackQuery
 
-from db import get_person_from_db, exist_in_db
-from middlewares.language_middleware import _
-from misc.person_data_view import from_db_to_view
+from tgbot.db import get_person_from_db, exist_in_db
+from tgbot.middlewares.language_middleware import _
+from tgbot.misc.person_data_view import from_db_to_view
 from tgbot.filters import BackMenuFilter, EditPersonFilter
 from tgbot.keyboards import back_or_main_keyboard, what_to_edit_keyboard
 from tgbot.misc.states import EditPersonStates, EditNameStates, EditDateStates, EditNotificationStates

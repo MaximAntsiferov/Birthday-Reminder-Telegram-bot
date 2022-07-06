@@ -3,7 +3,7 @@ from typing import Tuple, Any, Optional
 from aiogram.contrib.middlewares.i18n import I18nMiddleware
 from aiogram.types import User
 
-from db import get_lang_from_db
+from tgbot.db import get_lang_from_db
 from tgbot.config import I18N_DOMAIN, LOCALES_DIR
 
 

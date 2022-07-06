@@ -1,23 +1,19 @@
-import logging
-
 from aiogram import Dispatcher
 from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery, Message
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
-from db import exist_in_db, get_person_from_db, del_from_db
-from filters import DelPersonFilter, ApproveDataFilter, BackMenuFilter
-from middlewares.language_middleware import _
+from tgbot.db import exist_in_db, get_person_from_db, del_from_db
+from tgbot.filters import DelPersonFilter, ApproveDataFilter, BackMenuFilter
+from tgbot.middlewares.language_middleware import _
 
-from keyboards import back_or_main_keyboard, approving_keyboard, main_menu_button
-from misc.person_data_view import from_db_to_view
-from misc.states import DelPersonStates
+from tgbot.keyboards import back_or_main_keyboard, approving_keyboard, main_menu_button
+from tgbot.misc.person_data_view import from_db_to_view
+from tgbot.misc.states import DelPersonStates
+from tgbot.scheduler import del_from_scheduler, get_id_by_name
 
 
 # Хэндлер для меню "Удалить"
-from scheduler import del_from_scheduler, get_id_by_name
-
-
 async def del_person_handler(call: CallbackQuery):
     text = _("Введите имя человека, которого хотите удалить из списка")
 
@@ -65,10 +61,9 @@ def reg_del_person_handlers(dp: Dispatcher):
     # Регистрация хендлера многоуровнего меню "Удалить"
     dp.register_callback_query_handler(del_person_handler, DelPersonFilter(), state="*")
     dp.register_message_handler(check_before_del_handler, state=DelPersonStates.waiting_for_name_to_del)
-    dp.register_callback_query_handler(deleting_complete_handler, ApproveDataFilter(), state=DelPersonStates.waiting_for_del_approve)
+    dp.register_callback_query_handler(deleting_complete_handler, ApproveDataFilter(),
+                                       state=DelPersonStates.waiting_for_del_approve)
 
     # Регистрация хэндлеров кнопки "Назад" в ветке "Удалить"
-    dp.register_callback_query_handler(del_person_handler, BackMenuFilter(), state=DelPersonStates.waiting_for_del_approve)
-
-
-
+    dp.register_callback_query_handler(del_person_handler, BackMenuFilter(),
+                                       state=DelPersonStates.waiting_for_del_approve)

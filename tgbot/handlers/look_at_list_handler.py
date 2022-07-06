@@ -1,13 +1,13 @@
 from aiogram import Dispatcher
 from aiogram.types import CallbackQuery
 
-from db import get_data_from_db
-from filters import BackMenuFilter, LookAtListFilter
-from keyboards import del_or_edit_keyboard
-from middlewares.language_middleware import _
-from misc.notification_views import short_notification
+from tgbot.db import get_data_from_db
+from tgbot.filters import BackMenuFilter, LookAtListFilter
+from tgbot.keyboards import del_or_edit_keyboard
+from tgbot.middlewares.language_middleware import _
+from tgbot.misc.notification_views import short_notification
 
-from misc.states import DelPersonStates, EditPersonStates, LookAtListStates
+from tgbot.misc.states import DelPersonStates, EditPersonStates, LookAtListStates
 
 
 # Хэндлер для меню "Смотреть список"

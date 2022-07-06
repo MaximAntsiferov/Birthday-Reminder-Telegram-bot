@@ -1,4 +1,4 @@
-from misc.notification_views import short_notification
+from tgbot.misc.notification_views import short_notification
 
 
 async def from_db_to_view(data):

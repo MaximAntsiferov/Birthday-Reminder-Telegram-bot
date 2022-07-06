@@ -1,6 +1,6 @@
 [Unit]
 Description=Course Bot
-After=network.target
+After=network.targets
 
 [Service]
 User=tgbot
