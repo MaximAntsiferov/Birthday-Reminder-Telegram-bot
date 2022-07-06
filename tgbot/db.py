@@ -71,7 +71,7 @@ async def set_lang_to_db(user_id: int, lang: str) -> str:
 
 
 # Добавление записи в БД
-async def add_person_to_db(user_id: int, name: str, day: str, month: str, year: str | None, notification: str):
+async def add_person_to_db(user_id: int, name: str, day: str, month: str, year: str, notification: str):
     connection = await connection_to_db()
     await connection.execute("INSERT INTO birthdays(user_id, name, day, month, year, notification) "
                              "VALUES($1, $2, $3, $4, $5, $6)",
