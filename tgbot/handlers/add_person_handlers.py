@@ -12,12 +12,9 @@ from tgbot.misc.notification_views import long_notification
 from tgbot.misc.numbers_to_months import months
 from tgbot.misc.states import AddPersonStates
 from tgbot.db import exist_in_db, add_person_to_db
-
+from tgbot.scheduler import add_to_scheduler
 
 # Хэндлер для кнопки "Добавить"
-from scheduler import add_to_scheduler
-
-
 async def add_person_handler(call: CallbackQuery):
     text = _("Введите имя человека, которого хотите добавить в список дней рождений."
              "\nНапример: <b>Олег(автосервис)</b>")

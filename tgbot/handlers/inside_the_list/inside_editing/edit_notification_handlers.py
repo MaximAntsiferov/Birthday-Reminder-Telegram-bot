@@ -3,18 +3,15 @@ from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
-from db import update_notifications_in_db
-from filters import BackMenuFilter, EditNoteFilter, ChooseNotificationFilter, ApproveDataFilter
-from keyboards import add_notification_keyboard, approving_keyboard, after_changes_keyboard
-from misc.notification_views import long_notification
-from misc.states import EditNotificationStates, EditPersonStates
-from middlewares.language_middleware import _
-
+from tgbot.db import update_notifications_in_db
+from tgbot.filters import BackMenuFilter, EditNoteFilter, ChooseNotificationFilter, ApproveDataFilter
+from tgbot.keyboards import add_notification_keyboard, approving_keyboard, after_changes_keyboard
+from tgbot.misc.notification_views import long_notification
+from tgbot.misc.states import EditNotificationStates, EditPersonStates
+from tgbot.middlewares.language_middleware import _
+from tgbot.scheduler import get_id_by_name, modify_notification
 
 # Хэндлер для меню "Изменить уведомление"
-from scheduler import get_id_by_name, modify_notification
-
-
 async def edit_notification_handler(call: CallbackQuery, state: FSMContext):
     text = _("Выберите когда напоминать Вам о Дне рождения <b>{name}</b>:")
 

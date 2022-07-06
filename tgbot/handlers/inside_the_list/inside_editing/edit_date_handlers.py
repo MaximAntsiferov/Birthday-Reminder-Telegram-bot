@@ -3,19 +3,16 @@ from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery, Message
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
-from db import update_date_in_db
-from filters import BackMenuFilter, EditDateFilter, ApproveDataFilter, SkipFilter
-from keyboards import back_or_main_keyboard, add_year_keyboard, approving_keyboard, after_changes_keyboard
-from misc.check_date_format import correct_date_format, correct_year_format, lower_than_current
-from misc.numbers_to_months import months
-from misc.states import EditDateStates, EditPersonStates
-from middlewares.language_middleware import _
-
+from tgbot.db import update_date_in_db
+from tgbot.filters import BackMenuFilter, EditDateFilter, ApproveDataFilter, SkipFilter
+from tgbot.keyboards import back_or_main_keyboard, add_year_keyboard, approving_keyboard, after_changes_keyboard
+from tgbot.misc.check_date_format import correct_date_format, correct_year_format, lower_than_current
+from tgbot.misc.numbers_to_months import months
+from tgbot.misc.states import EditDateStates, EditPersonStates
+from tgbot.middlewares.language_middleware import _
+from tgbot.scheduler import get_id_by_name, modify_date
 
 # Хэндлер для меню "Изменить дату"
-from scheduler import get_id_by_name, modify_date
-
-
 async def edit_date_handler(call: CallbackQuery):
     text = _("Введите новые число и месяц.\n"
              "Например: <b>19.01</b>")

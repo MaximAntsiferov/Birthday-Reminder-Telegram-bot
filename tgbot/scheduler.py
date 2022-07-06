@@ -2,8 +2,8 @@ from datetime import date, timedelta
 from aiogram import Bot
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
-from db import connection_to_db, close_connection
-from middlewares.language_middleware import _
+from tgbot.db import connection_to_db, close_connection
+from tgbot.middlewares.language_middleware import _
 
 
 async def tasks_on_startup(scheduler: AsyncIOScheduler, bot: Bot):

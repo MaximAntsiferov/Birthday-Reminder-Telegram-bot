@@ -1,19 +1,17 @@
 from aiogram import Dispatcher
 from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery, Message
-from apscheduler.job import Job
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
-from db import exist_in_db, update_name_in_db
-from filters import BackMenuFilter, EditNameFilter, ApproveDataFilter
-from keyboards import back_or_main_keyboard, after_changes_keyboard, approving_keyboard
-from misc.states import EditPersonStates, EditNameStates
-from middlewares.language_middleware import _
+from tgbot.db import exist_in_db, update_name_in_db
+from tgbot.filters import BackMenuFilter, EditNameFilter, ApproveDataFilter
+from tgbot.keyboards import back_or_main_keyboard, after_changes_keyboard, approving_keyboard
+from tgbot.misc.states import EditPersonStates, EditNameStates
+from tgbot.middlewares.language_middleware import _
+from tgbot.scheduler import get_id_by_name, modify_name
+
 
 # Хэндлер для меню "Изменить имя"
-from scheduler import get_id_by_name, modify_name
-
-
 async def edit_name_handler(call: CallbackQuery):
     text = _("Введите новое имя")
 

@@ -1,6 +1,6 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-from middlewares.language_middleware import _
+from tgbot.middlewares.language_middleware import _
 
 
 def main_menu_keyboard():
