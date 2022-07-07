@@ -1,13 +1,13 @@
 [Unit]
-Description=Course Bot
+Description=Birthday Reminder Telegram Bot
 After=network.targets
 
 [Service]
-User=tgbot
-Group=tgbot
-Type=simple
-WorkingDirectory=/opt/tgbot
-ExecStart=/opt/tgbot/venv/bin/python bot.py
+User=root
+Group=root
+WorkingDirectory=/Birthday-Reminder-Telegram-bot/
+Environment="PYTHONPATH=/Birthday-Reminder-Telegram-bot/"
+ExecStart=/Birthday-Reminder-Telegram-bot/.venv/bin/python /Birthday-Reminder-Telegram-bot/bot.py
 Restart=always
 
 [Install]
