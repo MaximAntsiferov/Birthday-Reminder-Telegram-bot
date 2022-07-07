@@ -1,3 +1,5 @@
+from typing import Union
+
 from aiogram import Dispatcher, Bot
 from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery, Message
@@ -25,7 +27,7 @@ async def add_person_handler(call: CallbackQuery):
 
 
 # Хэндлер для меню "Введите число и месяц рождения"
-async def add_date_handler(target: Message | CallbackQuery, state: FSMContext):
+async def add_date_handler(target: Union[Message, CallbackQuery], state: FSMContext):
     text = _("Такое имя уже есть в Вашем списке. Введите, пожалуйста, уникальное имя.")
     text2 = _("Вы ввели имя: <b>{name}</b>\n"
               "\n"
@@ -51,7 +53,7 @@ async def add_date_handler(target: Message | CallbackQuery, state: FSMContext):
 
 
 # Хэндлер для меню "Введите год рождения"
-async def add_year_handler(target: Message | CallbackQuery, state: FSMContext):
+async def add_year_handler(target: Union[Message, CallbackQuery], state: FSMContext):
     text = _("Вы ввели имя: <b>{name}</b>\n"
              "Вы ввели дату: <b>{day} {month}</b>\n"
              "\n"
@@ -87,7 +89,7 @@ async def add_year_handler(target: Message | CallbackQuery, state: FSMContext):
 
 
 # Хэндлер для меню "Выберите когда напоминать о ДР"
-async def add_notification_handler(target: Message | CallbackQuery, state: FSMContext):
+async def add_notification_handler(target: Union[Message, CallbackQuery], state: FSMContext):
     text = _("Вы ввели имя: <b>{name}</b>\n"
              "Вы ввели дату: <b>{day} {month}</b>\n"
              "Вы ввели год: <b>{year}</b>\n"
@@ -178,7 +180,7 @@ async def adding_complete_handler(call: CallbackQuery, state: FSMContext, schedu
     await add_person_to_db(user_id=user_id, name=name, day=day, month=month, year=year,
                            notification=notification)
     await call.message.answer(text=text, reply_markup=main_menu_button())
-    add_to_scheduler(scheduler, bot, name, day, month, year, user_id, notification)
+    await add_to_scheduler(scheduler, bot, name, day, month, year, user_id, notification)
     print(scheduler.get_jobs())
     await state.finish()
 

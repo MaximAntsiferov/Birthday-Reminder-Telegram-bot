@@ -1,3 +1,5 @@
+from typing import Union
+
 from aiogram import Dispatcher
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import CommandStart
@@ -10,7 +12,7 @@ from tgbot.db import set_lang_to_db
 
 
 # Хэндлер для команды "/start" и кнопки "Главное меню"
-async def start_handler(target: Message | CallbackQuery, state: FSMContext):
+async def start_handler(target: Union[Message, CallbackQuery], state: FSMContext):
     text = _("Добро пожаловать в <b>Birthday Reminder!</b>\n"
              "\n"
              "Добавьте человека, указав его имя и дату рождения.\n"
@@ -27,7 +29,7 @@ async def start_handler(target: Message | CallbackQuery, state: FSMContext):
 
 
 # Хэндлер для команды "/language" и кнопки "Выбрать язык"
-async def choose_language_handler(target: Message | CallbackQuery, state: FSMContext):
+async def choose_language_handler(target: Union[Message, CallbackQuery], state: FSMContext):
     text = _("Выберите удобный для Вас язык")
 
     await state.finish()

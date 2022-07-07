@@ -1,3 +1,5 @@
+from typing import Union
+
 from aiogram import Dispatcher
 from aiogram.dispatcher import FSMContext
 from aiogram.types import Message, CallbackQuery
@@ -20,7 +22,7 @@ async def edit_person_handler(call: CallbackQuery):
 
 
 # Хэндлер для меню "Выберите данные для изменения"
-async def what_to_edit_handler(target: Message | CallbackQuery, state: FSMContext):
+async def what_to_edit_handler(target: Union[Message, CallbackQuery], state: FSMContext):
     text = _("Вы выбрали запись:\n"
              "\n")
     text2 = _("Такого имени нет в списке, проверьте правильность написания и введите имя еще раз:")

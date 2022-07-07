@@ -1,4 +1,6 @@
 from datetime import date, timedelta
+from typing import Optional
+
 from aiogram import Bot
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
@@ -17,7 +19,8 @@ async def tasks_on_startup(scheduler: AsyncIOScheduler, bot: Bot):
         month = data["month"]
         day = data["day"]
         notification = data["notification"]
-        await add_to_scheduler(scheduler, bot, name, day, month, year, user_id, notification)
+        await add_to_scheduler(scheduler=scheduler, bot=bot, name=name, day=day, month=month, year=year,
+                               user_id=user_id, notification=notification)
 
 
 async def add_to_scheduler(scheduler: AsyncIOScheduler, bot: Bot, name: str, day: str, month: str, year: str,

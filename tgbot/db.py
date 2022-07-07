@@ -1,3 +1,5 @@
+from typing import List
+
 import asyncpg
 import logging
 
@@ -79,10 +81,8 @@ async def add_person_to_db(user_id: int, name: str, day: str, month: str, year: 
     await close_connection(connection)
 
 
-
-
 # Запрос списка дней рождений из БД
-async def get_data_from_db(user_id: int) -> list[asyncpg.Record]:
+async def get_data_from_db(user_id: int) -> List[asyncpg.Record]:
     connection = await connection_to_db()
     values = await connection.fetch(f"SELECT * FROM birthdays WHERE user_id ='{user_id}' ORDER BY month, day")
     await close_connection(connection)
@@ -101,7 +101,7 @@ async def exist_in_db(name: str, user_id: int) -> bool:
 
 
 # Запрос данных имени из БД
-async def get_person_from_db(name: str, user_id: int) -> str:
+async def get_person_from_db(name: str, user_id: int) -> asyncpg.Record:
     connection = await connection_to_db()
     values = await connection.fetch(f"SELECT * FROM birthdays WHERE user_id ='{user_id}' AND name = '{name}'")
     await close_connection(connection)

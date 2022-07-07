@@ -1,3 +1,5 @@
+from typing import Union
+
 from aiogram import Dispatcher
 from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery, Message
@@ -23,7 +25,7 @@ async def edit_date_handler(call: CallbackQuery):
 
 
 # Хэндлер для меню "Изменить год"
-async def edit_year_handler(target: Message | CallbackQuery, state: FSMContext):
+async def edit_year_handler(target: Union[Message, CallbackQuery], state: FSMContext):
     text = _("Вы ввели новую дату: <b>{new_day} {new_month}</b>\n"
              "\n"
              "Теперь введите новый год рождения.\n"
@@ -56,7 +58,7 @@ async def edit_year_handler(target: Message | CallbackQuery, state: FSMContext):
 
 
 # Хэндлер для меню "Подтвердить новую дату"
-async def check_before_save_date_handler(target: Message | CallbackQuery, state: FSMContext):
+async def check_before_save_date_handler(target: Union[Message, CallbackQuery], state: FSMContext):
     text = _(
         "Вы действительно хотите изменить дату рождения <b>{name}</b> на <b>{new_day}.{new_month}.{new_year}</b>?\n"
         "\n")
@@ -74,6 +76,7 @@ async def check_before_save_date_handler(target: Message | CallbackQuery, state:
     name = data.get("name")
     new_day = data.get("new_day")
     new_month = data.get("new_month")
+    new_year = None
 
     if isinstance(target, Message):
         if not await correct_year_format(message=target.text):
