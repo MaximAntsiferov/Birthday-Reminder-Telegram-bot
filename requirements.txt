@@ -3,3 +3,5 @@ asyncpg~=0.25.0
 python-dotenv~=0.20.0
 APScheduler~=3.9.1
 aioredis~=2.0.1
+redis~=4.3.4
+apscheduler-di~=0.0.4

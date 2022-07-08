@@ -5,6 +5,7 @@ from aiogram import Bot, Dispatcher
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.contrib.fsm_storage.redis import RedisStorage2
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
+from apscheduler_di import ContextSchedulerDecorator
 
 from tgbot.commands import set_my_default_commands
 from tgbot.config import BOT_TOKEN, USE_REDIS
@@ -51,8 +52,11 @@ async def main():
     storage = RedisStorage2() if USE_REDIS else MemoryStorage()
     bot = Bot(token=BOT_TOKEN, parse_mode='HTML')
     dp = Dispatcher(bot, storage=storage)
-    scheduler = AsyncIOScheduler()
+    scheduler = ContextSchedulerDecorator(AsyncIOScheduler())
     scheduler.add_jobstore('redis', jobs_key='birthdays_jobs', run_times_key='birthdays_run_times')
+
+    scheduler.ctx.add_instance(bot, declared_class=Bot)
+
 
     register_all_filters(dp)
     register_all_handlers(dp)
