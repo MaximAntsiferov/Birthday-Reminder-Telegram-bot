@@ -25,7 +25,6 @@ async def tasks_on_startup(scheduler: ContextSchedulerDecorator):
             await add_to_scheduler(scheduler=scheduler, name=name, day=day, month=month, year=year,
                                    user_id=user_id, notification=notification)
     else:
-        print(jobs)
         return
 
 
