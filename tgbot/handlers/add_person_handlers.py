@@ -32,6 +32,7 @@ async def add_date_handler(target: Union[Message, CallbackQuery], state: FSMCont
     text = _("Такое имя уже есть в Вашем списке.\n"
              "\n"
              "Введите, пожалуйста, уникальное имя.")
+
     text2 = _("Вы ввели имя: <b>{name}</b>\n"
               "\n"
               "Теперь введите число и месяц рождения.\n"
