@@ -55,8 +55,6 @@ async def main():
     scheduler = ContextSchedulerDecorator(AsyncIOScheduler())
     scheduler.add_jobstore('redis', jobs_key='birthdays_jobs', run_times_key='birthdays_run_times')
 
-    scheduler.ctx.add_instance(bot, declared_class=Bot)
-
 
     register_all_filters(dp)
     register_all_handlers(dp)

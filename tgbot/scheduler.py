@@ -3,13 +3,14 @@ from typing import Optional
 
 from aiogram import Bot
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
+from apscheduler_di import ContextSchedulerDecorator
 
 from tgbot.db import connection_to_db, close_connection
 from tgbot.middlewares.language_middleware import _
 
 
 # Добавляем все ранее созданные задания из БД в планировщик
-async def tasks_on_startup(scheduler: AsyncIOScheduler, bot: Bot):
+async def tasks_on_startup(scheduler: ContextSchedulerDecorator, bot: Bot):
     connection = await connection_to_db()
     values = await connection.fetch(f"SELECT * FROM birthdays")
     await close_connection(connection)
@@ -20,6 +21,11 @@ async def tasks_on_startup(scheduler: AsyncIOScheduler, bot: Bot):
         month = data["month"]
         day = data["day"]
         notification = data["notification"]
+
+        scheduler.ctx.add_instance(bot, declared_class=Bot)
+        scheduler.ctx.add_instance(name, declared_class=str)
+        scheduler.ctx.add_instance(year, declared_class=int)
+        scheduler.ctx.add_instance(user_id, declared_class=str)
         await add_to_scheduler(scheduler=scheduler, bot=bot, name=name, day=day, month=month, year=year,
                                user_id=user_id, notification=notification)
 
@@ -120,7 +126,7 @@ async def modify_date(scheduler: AsyncIOScheduler, new_day: str, new_month: str,
         scheduler.reschedule_job(job_id=before_id, trigger="cron", month=new_month, day=new_day, hour=9, minute=0)
 
 
-async def modify_notification(scheduler: AsyncIOScheduler, bot: Bot, notification: str, user_id: str, name: str,
+async def modify_notification(scheduler: AsyncIOScheduler, bot: Bot, notification: str, user_id: int, name: str,
                               year: Optional[int], month: int, day: int, onday_id: str, before_id: str):
 
     if notification == "on_date":
