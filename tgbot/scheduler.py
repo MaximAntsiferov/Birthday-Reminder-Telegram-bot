@@ -8,6 +8,7 @@ from tgbot.db import connection_to_db, close_connection
 from tgbot.middlewares.language_middleware import _
 
 
+# Добавляем все ранее созданные задания из БД в планировщик
 async def tasks_on_startup(scheduler: AsyncIOScheduler, bot: Bot):
     connection = await connection_to_db()
     values = await connection.fetch(f"SELECT * FROM birthdays")

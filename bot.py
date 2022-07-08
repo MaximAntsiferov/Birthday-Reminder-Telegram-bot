@@ -3,10 +3,11 @@ import logging
 
 from aiogram import Bot, Dispatcher
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
+from aiogram.contrib.fsm_storage.redis import RedisStorage2
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
 from tgbot.commands import set_my_default_commands
-from tgbot.config import BOT_TOKEN
+from tgbot.config import BOT_TOKEN, USE_REDIS
 from tgbot.db import create_tables
 from tgbot.filters import register_all_filters
 from tgbot.handlers.add_person_handlers import reg_add_person_handlers
@@ -47,7 +48,7 @@ async def main():
     )
     logger.info("Starting bot")
 
-    storage = MemoryStorage()
+    storage = RedisStorage2() if USE_REDIS else MemoryStorage()
     bot = Bot(token=BOT_TOKEN, parse_mode='HTML')
     dp = Dispatcher(bot, storage=storage)
     scheduler = AsyncIOScheduler()

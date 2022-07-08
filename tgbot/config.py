@@ -7,6 +7,7 @@ load_dotenv()
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 ADMINS = [int(i) for i in os.getenv("ADMINS").split(",")]
+USE_REDIS = True
 
 DB_HOST = os.getenv("DB_HOST")
 DB_USER = os.getenv("DB_USER")
