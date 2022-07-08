@@ -52,6 +52,7 @@ async def main():
     bot = Bot(token=BOT_TOKEN, parse_mode='HTML')
     dp = Dispatcher(bot, storage=storage)
     scheduler = AsyncIOScheduler()
+    scheduler.add_jobstore('redis', jobs_key='birthdays_jobs', run_times_key='birthdays_run_times')
 
     register_all_filters(dp)
     register_all_handlers(dp)
