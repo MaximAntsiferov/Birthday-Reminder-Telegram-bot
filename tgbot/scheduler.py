@@ -33,17 +33,17 @@ async def add_to_scheduler(scheduler: AsyncIOScheduler, name: str, day: str, mon
 
     if notification == "on_date":
         scheduler.add_job(add_onday_reminder, "cron", month=month, day=day, hour=9, minute=0,
-                          args=[name, year, user_id], name=f"onday_{user_id}_{name}")
+                          kwargs={"name": name, "year": year, "user_id": user_id}, name=f"onday_{user_id}_{name}")
     elif notification == "three_days_before":
         day, month = await calculate_3days_before(day=day, month=month)
         scheduler.add_job(add_3daysbefore_reminder, "cron", month=month, day=day, hour=9, minute=0,
-                          args=[name, year, user_id], name=f"before_{user_id}_{name}")
+                          kwargs={"name": name, "year": year, "user_id": user_id}, name=f"before_{user_id}_{name}")
     elif notification == "both_variants":
         scheduler.add_job(add_onday_reminder, "cron", month=month, day=day, hour=9, minute=0,
-                          args=[name, year, user_id], name=f"onday_{user_id}_{name}")
+                          kwargs={"name": name, "year": year, "user_id": user_id}, name=f"onday_{user_id}_{name}")
         day, month = await calculate_3days_before(day=day, month=month)
         scheduler.add_job(add_3daysbefore_reminder, "cron", month=month, day=day, hour=9, minute=0,
-                          args=[name, year, user_id], name=f"before_{user_id}_{name}")
+                          kwargs={"name": name, "year": year, "user_id": user_id}, name=f"before_{user_id}_{name}")
     else:
         return
 
