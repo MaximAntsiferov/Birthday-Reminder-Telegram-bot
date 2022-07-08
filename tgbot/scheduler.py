@@ -10,7 +10,7 @@ from tgbot.middlewares.language_middleware import _
 
 
 # Добавляем все ранее созданные задания из БД в планировщик
-async def tasks_on_startup(scheduler: ContextSchedulerDecorator, bot: Bot):
+async def tasks_on_startup(scheduler: ContextSchedulerDecorator):
     connection = await connection_to_db()
     values = await connection.fetch(f"SELECT * FROM birthdays")
     await close_connection(connection)
@@ -21,11 +21,11 @@ async def tasks_on_startup(scheduler: ContextSchedulerDecorator, bot: Bot):
         month = data["month"]
         day = data["day"]
         notification = data["notification"]
-        await add_to_scheduler(scheduler=scheduler, bot=bot, name=name, day=day, month=month, year=year,
+        await add_to_scheduler(scheduler=scheduler, name=name, day=day, month=month, year=year,
                                user_id=user_id, notification=notification)
 
 
-async def add_to_scheduler(scheduler: AsyncIOScheduler, bot: Bot, name: str, day: str, month: str, year: Optional[str],
+async def add_to_scheduler(scheduler: AsyncIOScheduler, name: str, day: str, month: str, year: Optional[str],
                            user_id: int, notification: str):
     day = int(day)
     month = int(month)
