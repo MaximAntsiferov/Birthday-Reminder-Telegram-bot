@@ -2,7 +2,6 @@ from datetime import date, timedelta
 from typing import Optional
 
 from aiogram import Bot
-from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler_di import ContextSchedulerDecorator
 
 from tgbot.db import connection_to_db, close_connection
@@ -25,7 +24,7 @@ async def tasks_on_startup(scheduler: ContextSchedulerDecorator):
                                user_id=user_id, notification=notification)
 
 
-async def add_to_scheduler(scheduler: AsyncIOScheduler, name: str, day: str, month: str, year: Optional[str],
+async def add_to_scheduler(scheduler: ContextSchedulerDecorator, name: str, day: str, month: str, year: Optional[str],
                            user_id: int, notification: str):
     day = int(day)
     month = int(month)
@@ -83,7 +82,7 @@ async def add_3daysbefore_reminder(bot: Bot, name: str, year: int, user_id: int)
     await bot.send_message(text=text.format(name=name, age=age, ending=ending), chat_id=user_id)
 
 
-async def del_from_scheduler(scheduler: AsyncIOScheduler, onday_id: str, before_id: str):
+async def del_from_scheduler(scheduler: ContextSchedulerDecorator, onday_id: str, before_id: str):
     if onday_id is not None:
         scheduler.remove_job(job_id=onday_id)
     if before_id is not None:
@@ -91,7 +90,7 @@ async def del_from_scheduler(scheduler: AsyncIOScheduler, onday_id: str, before_
     return
 
 
-async def get_id_by_name(scheduler: AsyncIOScheduler, user_id: int, name: str):
+async def get_id_by_name(scheduler: ContextSchedulerDecorator, user_id: int, name: str):
     list_of_all_jobs = scheduler.get_jobs()
     onday_id = None
     before_id = None
@@ -103,7 +102,7 @@ async def get_id_by_name(scheduler: AsyncIOScheduler, user_id: int, name: str):
     return onday_id, before_id
 
 
-async def modify_name(scheduler: AsyncIOScheduler, user_id: int, new_name: str, onday_id: str, before_id: str):
+async def modify_name(scheduler: ContextSchedulerDecorator, user_id: int, new_name: str, onday_id: str, before_id: str):
     if onday_id is not None:
         scheduler.modify_job(job_id=onday_id, name=f"onday_{user_id}_{new_name}")
     if before_id is not None:
@@ -111,7 +110,7 @@ async def modify_name(scheduler: AsyncIOScheduler, user_id: int, new_name: str, 
     return
 
 
-async def modify_date(scheduler: AsyncIOScheduler, new_day: str, new_month: str, onday_id: str, before_id: str):
+async def modify_date(scheduler: ContextSchedulerDecorator, new_day: str, new_month: str, onday_id: str, before_id: str):
     new_day = int(new_day)
     new_month = int(new_month)
     if onday_id is not None:
@@ -121,13 +120,13 @@ async def modify_date(scheduler: AsyncIOScheduler, new_day: str, new_month: str,
         scheduler.reschedule_job(job_id=before_id, trigger="cron", month=new_month, day=new_day, hour=9, minute=0)
 
 
-async def modify_notification(scheduler: AsyncIOScheduler, bot: Bot, notification: str, user_id: int, name: str,
+async def modify_notification(scheduler: ContextSchedulerDecorator, notification: str, user_id: int, name: str,
                               year: Optional[int], month: int, day: int, onday_id: str, before_id: str):
 
     if notification == "on_date":
         if onday_id is None:
             scheduler.add_job(add_onday_reminder, "cron", month=month, day=day, hour=9, minute=0,
-                              args=[name, year, user_id], name=f"onday_{user_id}_{name}")
+                              kwargs={"name": name, "year": year, "user_id": user_id}, name=f"onday_{user_id}_{name}")
         if before_id is not None:
             scheduler.remove_job(job_id=before_id)
 
@@ -135,15 +134,15 @@ async def modify_notification(scheduler: AsyncIOScheduler, bot: Bot, notificatio
         if before_id is None:
             day, month = await calculate_3days_before(day=day, month=month)
             scheduler.add_job(add_3daysbefore_reminder, "cron", month=month, day=day, hour=9, minute=0,
-                              args=[name, year, user_id], name=f"before_{user_id}_{name}")
+                              kwargs={"name": name, "year": year, "user_id": user_id}, name=f"before_{user_id}_{name}")
         if onday_id is not None:
             scheduler.remove_job(job_id=onday_id)
 
     elif notification == "both_variants":
         if onday_id is None:
             scheduler.add_job(add_onday_reminder, "cron", month=month, day=day, hour=9, minute=0,
-                              args=[name, year, user_id], name=f"onday_{user_id}_{name}")
+                              kwargs={"name": name, "year": year, "user_id": user_id}, name=f"onday_{user_id}_{name}")
         if before_id is None:
             day, month = await calculate_3days_before(day=day, month=month)
             scheduler.add_job(add_3daysbefore_reminder, "cron", month=month, day=day, hour=9, minute=0,
-                              args=[name, year, user_id], name=f"before_{user_id}_{name}")
+                              kwargs={"name": name, "year": year, "user_id": user_id}, name=f"before_{user_id}_{name}")

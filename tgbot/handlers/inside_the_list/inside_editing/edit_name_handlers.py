@@ -1,7 +1,7 @@
 from aiogram import Dispatcher
 from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery, Message
-from apscheduler.schedulers.asyncio import AsyncIOScheduler
+from apscheduler_di import ContextSchedulerDecorator
 
 from tgbot.db import exist_in_db, update_name_in_db
 from tgbot.filters import BackMenuFilter, EditNameFilter, ApproveDataFilter
@@ -38,7 +38,7 @@ async def check_before_edit_name_handler(message: Message, state: FSMContext):
 
 
 # Хэндлер для завершения редактирования имени с сохранением изменений в БД
-async def name_editing_complete_handler(call: CallbackQuery, state: FSMContext, scheduler: AsyncIOScheduler):
+async def name_editing_complete_handler(call: CallbackQuery, state: FSMContext, scheduler: ContextSchedulerDecorator):
     text = _("<b>Изменения успешно внесены</b>")
 
     await call.answer(cache_time=60)

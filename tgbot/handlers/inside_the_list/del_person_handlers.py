@@ -1,7 +1,7 @@
 from aiogram import Dispatcher
 from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery, Message
-from apscheduler.schedulers.asyncio import AsyncIOScheduler
+from apscheduler_di import ContextSchedulerDecorator
 
 from tgbot.db import exist_in_db, get_person_from_db, del_from_db
 from tgbot.filters import DelPersonFilter, ApproveDataFilter, BackMenuFilter
@@ -43,7 +43,7 @@ async def check_before_del_handler(message: Message, state: FSMContext):
 
 
 # Хэндлер для удаления из БД
-async def deleting_complete_handler(call: CallbackQuery, state: FSMContext, scheduler: AsyncIOScheduler):
+async def deleting_complete_handler(call: CallbackQuery, state: FSMContext, scheduler: ContextSchedulerDecorator):
     text = _("Напоминание о День рождении <b>{name}</b> удалено.")
 
     await call.answer(cache_time=60)

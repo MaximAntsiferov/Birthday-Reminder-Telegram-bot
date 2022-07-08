@@ -1,9 +1,9 @@
 from typing import Union
 
-from aiogram import Dispatcher, Bot
+from aiogram import Dispatcher
 from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery, Message
-from apscheduler.schedulers.asyncio import AsyncIOScheduler
+from apscheduler_di import ContextSchedulerDecorator
 
 from tgbot.filters import BackMenuFilter, AddNoteFilter, ChooseNotificationFilter, ApproveDataFilter, SkipFilter
 from tgbot.keyboards import main_menu_button, back_or_main_keyboard, add_year_keyboard, add_notification_keyboard, \
@@ -171,7 +171,7 @@ async def check_before_add_handler(call: CallbackQuery, state: FSMContext):
 
 
 # Хэндлер для завершения добавления нового напоминания с записью в БД
-async def adding_complete_handler(call: CallbackQuery, state: FSMContext, scheduler: AsyncIOScheduler):
+async def adding_complete_handler(call: CallbackQuery, state: FSMContext, scheduler: ContextSchedulerDecorator):
     text = _("<b>Отлично! Напоминание добавлено!</b>")
 
     await call.answer(cache_time=60)
@@ -181,14 +181,12 @@ async def adding_complete_handler(call: CallbackQuery, state: FSMContext, schedu
     month = data.get("month")
     year = data.get("year")
     notification = data.get("notification")
-    print(notification)
     user_id = call.from_user.id
-    bot = Bot.get_current()
     await add_person_to_db(user_id=user_id, name=name, day=day, month=month, year=year,
                            notification=notification)
     await call.message.answer(text=text, reply_markup=main_menu_button())
-    await add_to_scheduler(scheduler, bot, name, day, month, year, user_id, notification)
-    print(scheduler.get_jobs())
+    await add_to_scheduler(scheduler=scheduler, name=name, day=day, month=month, year=year, user_id=user_id,
+                           notification=notification)
     await state.finish()
 
 

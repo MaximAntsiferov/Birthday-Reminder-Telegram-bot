@@ -3,7 +3,6 @@ from typing import Union
 from aiogram import Dispatcher
 from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery, Message
-from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
 from tgbot.db import update_date_in_db
 from tgbot.filters import BackMenuFilter, EditDateFilter, ApproveDataFilter, SkipFilter
@@ -103,7 +102,7 @@ async def check_before_save_date_handler(target: Union[Message, CallbackQuery], 
 
 
 # Хэндлер для завершения редактирования даты с сохранением изменений в БД
-async def date_editing_complete_handler(call: CallbackQuery, state: FSMContext, scheduler: AsyncIOScheduler):
+async def date_editing_complete_handler(call: CallbackQuery, state: FSMContext, scheduler: ContextSchedulerDecorator):
     text = _("<b>Изменения успешно внесены</b>")
 
     await call.answer(cache_time=60)

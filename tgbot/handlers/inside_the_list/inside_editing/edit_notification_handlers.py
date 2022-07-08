@@ -1,7 +1,7 @@
-from aiogram import Dispatcher, Bot
+from aiogram import Dispatcher
 from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery
-from apscheduler.schedulers.asyncio import AsyncIOScheduler
+from apscheduler_di import ContextSchedulerDecorator
 
 from tgbot.db import update_notifications_in_db
 from tgbot.filters import BackMenuFilter, EditNoteFilter, ChooseNotificationFilter, ApproveDataFilter
@@ -40,7 +40,7 @@ async def check_before_edit_notif_handler(call: CallbackQuery, state: FSMContext
 
 
 # Хэндлер для завершения редактирования уведомлений с сохранением изменений в БД
-async def notif_editing_complete_handler(call: CallbackQuery, state: FSMContext, scheduler: AsyncIOScheduler):
+async def notif_editing_complete_handler(call: CallbackQuery, state: FSMContext, scheduler: ContextSchedulerDecorator):
     text = _("<b>Изменения успешно внесены</b>")
 
     await call.answer(cache_time=60)
@@ -51,11 +51,10 @@ async def notif_editing_complete_handler(call: CallbackQuery, state: FSMContext,
     day = data.get("day")
     notification = data.get("notification")
     user_id = call.from_user.id
-    bot = Bot.get_current()
     await update_notifications_in_db(notification=notification, user_id=user_id, name=name)
     await call.message.answer(text=text, reply_markup=after_changes_keyboard())
     onday_id, before_id = await get_id_by_name(scheduler=scheduler, user_id=user_id, name=name)
-    await modify_notification(scheduler=scheduler, bot=bot, notification=notification, user_id=user_id, name=name,
+    await modify_notification(scheduler=scheduler, notification=notification, user_id=user_id, name=name,
                               year=year, month=month, day=day, onday_id=onday_id, before_id=before_id)
     await state.finish()
 
