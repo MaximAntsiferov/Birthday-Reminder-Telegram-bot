@@ -71,7 +71,7 @@ async def main():
     await set_my_default_commands(bot)
     await create_tables()
     scheduler.start()
-    await tasks_on_startup(scheduler, bot)
+    await tasks_on_startup(scheduler)
 
 
     # start
