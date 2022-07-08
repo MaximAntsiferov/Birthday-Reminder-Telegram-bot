@@ -3,6 +3,7 @@ from typing import Union
 from aiogram import Dispatcher
 from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery, Message
+from apscheduler_di import ContextSchedulerDecorator
 
 from tgbot.db import update_date_in_db
 from tgbot.filters import BackMenuFilter, EditDateFilter, ApproveDataFilter, SkipFilter
