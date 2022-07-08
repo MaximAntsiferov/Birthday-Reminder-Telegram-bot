@@ -31,7 +31,8 @@ async def edit_year_handler(target: Union[Message, CallbackQuery], state: FSMCon
              "Теперь введите новый год рождения.\n"
              "Например: <b>1990</b>")
     text2 = _("Вы ввели несуществующую дату.\n"
-              "Введите пожалуйста число и месяц в формате <b>дд.мм</b>.\n"
+              "\n"
+              "Введите пожалуйста число и месяц в формате <b>DD.MM</b>.\n"
               "Например <b>19.01</b>")
 
     if isinstance(target, Message):
@@ -60,16 +61,18 @@ async def edit_year_handler(target: Union[Message, CallbackQuery], state: FSMCon
 # Хэндлер для меню "Подтвердить новую дату"
 async def check_before_save_date_handler(target: Union[Message, CallbackQuery], state: FSMContext):
     text = _(
-        "Вы действительно хотите изменить дату рождения <b>{name}</b> на <b>{new_day}.{new_month}.{new_year}</b>?\n"
+        "Вы действительно хотите изменить День Рождения <b>{name}</b> на <b>{new_day}.{new_month}.{new_year}</b>?\n"
         "\n")
-    text2 = _("Вы действительно хотите изменить дату рождения <b>{name}</b> на <b>{new_day}.{new_month}</b>?\n"
+    text2 = _("Вы действительно хотите изменить День Рождения <b>{name}</b> на <b>{new_day}.{new_month}</b>?\n"
               "\n")
     text3 = _("Год рождения не может быть больше текущего года.\n"
+              "\n"
               "Введите корректный год рождения.\n"
               "Например: <b>1990</b>")
 
     text4 = _("Не правильный формат ввода.\n"
-              "Введите год рождения в формате <b>гггг</b>.\n"
+              "\n"
+              "Введите год рождения в формате <b>YYYY</b>.\n"
               "Например: <b>1990</b>")
 
     data = await state.get_data()

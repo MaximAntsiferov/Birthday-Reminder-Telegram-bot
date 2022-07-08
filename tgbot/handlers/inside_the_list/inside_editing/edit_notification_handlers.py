@@ -28,7 +28,7 @@ async def check_before_edit_notif_handler(call: CallbackQuery, state: FSMContext
     text = _("Теперь бот будет напоминать Вам о день рождении <b>{name}</b>:\n\n"
              "<b>{notification}</b>\n"
              "\n"
-             "Нажмите кнопку 'Все верно', чтобы сохранить данные изменения.")
+             "Нажмите кнопку 'Все верно', чтобы сохранить изменения.")
 
     await call.answer(cache_time=60)
     data = await state.get_data()

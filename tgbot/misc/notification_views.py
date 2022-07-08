@@ -15,10 +15,10 @@ async def short_notification(notification: str) -> str:
 
 async def long_notification(notification: str) -> str:
     if notification == "on_date":
-        return _("- в День рождения в 9:00")
+        return _("- в День рождения")
     elif notification == "three_days_before":
         return _("- за 3 дня до Дня рождения")
     elif notification == "both_variants":
-        return _("- в День рождения в 9:00\n- за 3 дня до Дня рождения")
+        return _("- в День рождения\n- за 3 дня до Дня рождения")
     else:
         return

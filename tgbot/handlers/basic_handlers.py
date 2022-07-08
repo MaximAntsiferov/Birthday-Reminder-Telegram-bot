@@ -15,8 +15,7 @@ from tgbot.db import set_lang_to_db
 async def start_handler(target: Union[Message, CallbackQuery], state: FSMContext):
     text = _("Добро пожаловать в <b>Birthday Reminder!</b>\n"
              "\n"
-             "Добавьте человека, указав его имя и дату рождения.\n"
-             "Бот напомнит Вам когда наступит его День Рождения.\n")
+             "Добавьте человека в список и бот напомнит Вам о его Дне рождения.\n")
 
     await state.finish()
     if isinstance(target, Message):

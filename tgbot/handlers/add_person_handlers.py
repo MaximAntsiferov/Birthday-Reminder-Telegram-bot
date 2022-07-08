@@ -19,7 +19,8 @@ from tgbot.scheduler import add_to_scheduler
 # Хэндлер для кнопки "Добавить"
 async def add_person_handler(call: CallbackQuery):
     text = _("Введите имя человека, которого хотите добавить в список дней рождений."
-             "\nНапример: <b>Олег(автосервис)</b>")
+             "\n"
+             "\nНапример: <b>Олег В.</b>")
 
     await call.answer(cache_time=60)
     await call.message.answer(text=text, reply_markup=main_menu_button())
@@ -28,7 +29,9 @@ async def add_person_handler(call: CallbackQuery):
 
 # Хэндлер для меню "Введите число и месяц рождения"
 async def add_date_handler(target: Union[Message, CallbackQuery], state: FSMContext):
-    text = _("Такое имя уже есть в Вашем списке. Введите, пожалуйста, уникальное имя.")
+    text = _("Такое имя уже есть в Вашем списке.\n"
+             "\n"
+             "Введите, пожалуйста, уникальное имя.")
     text2 = _("Вы ввели имя: <b>{name}</b>\n"
               "\n"
               "Теперь введите число и месяц рождения.\n"
@@ -61,7 +64,8 @@ async def add_year_handler(target: Union[Message, CallbackQuery], state: FSMCont
              "Например: <b>1990</b>")
 
     text2 = _("Вы ввели несуществующую дату.\n"
-              "Введите пожалуйста число и месяц в формате <b>дд.мм</b>.\n"
+              "\n"
+              "Введите, пожалуйста, число и месяц в формате <b>DD.ММ</b>.\n"
               "Например <b>19.01</b>")
 
     data = await state.get_data()
@@ -94,14 +98,16 @@ async def add_notification_handler(target: Union[Message, CallbackQuery], state:
              "Вы ввели дату: <b>{day} {month}</b>\n"
              "Вы ввели год: <b>{year}</b>\n"
              "\n"
-             "Теперь выберите когда напоминать Вам о день рождении {name}:")
+             "Теперь выберите когда напоминать Вам о Дне Рождения <b>{name}</b>:")
 
     text2 = _("Год рождения не может быть больше текущего года.\n"
+              "\n"
               "Введите корректный год рождения.\n"
               "Например: <b>1990</b>")
 
     text3 = _("Не правильный формат ввода.\n"
-              "Введите год рождения в формате <b>гггг</b>.\n"
+              "\n"
+              "Введите год рождения в формате <b>YYYY</b>.\n"
               "Например: <b>1990</b>")
 
     data = await state.get_data()
@@ -138,7 +144,7 @@ async def add_notification_handler(target: Union[Message, CallbackQuery], state:
 
 # Хэндлер для меню "Подтвердите введенные данные"
 async def check_before_add_handler(call: CallbackQuery, state: FSMContext):
-    text = _("Давайте проверим:\n"
+    text = _("Проверьте введеные данные:\n"
              "\n"
              "Вы ввели имя: <b>{name}</b>\n"
              "Вы ввели дату: <b>{day} {month}</b>\n"
@@ -147,7 +153,7 @@ async def check_before_add_handler(call: CallbackQuery, state: FSMContext):
              "Напоминать:\n"
              "<b>{notification}</b>\n"
              "\n"
-             "Нажмите кнопку 'Все верно' и я буду каждый год напоминать Вам о день рождении {name}")
+             "Нажмите кнопку 'Все верно', чтобы установить ежегодное напоминание о Дне Рождения <b>{name}</b>")
 
     await call.answer(cache_time=60)
     data = await state.get_data()

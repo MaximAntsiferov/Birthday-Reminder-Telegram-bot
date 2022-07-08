@@ -26,7 +26,7 @@ async def del_person_handler(call: CallbackQuery):
 async def check_before_del_handler(message: Message, state: FSMContext):
     text = _("Вы действительно хотите удалить запись со следующими данными:\n"
              "\n")
-    text2 = _("Такого имени нет в списке, проверьте правильность написания и введите имя еще раз:")
+    text2 = _("Такого имени нет в списке, проверьте правильность написания и введите имя еще раз.")
 
     name = message.text
     user_id = message.from_user.id

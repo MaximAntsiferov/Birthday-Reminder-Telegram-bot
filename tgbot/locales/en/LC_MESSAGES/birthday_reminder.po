@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-06-27 15:45+0700\n"
+"POT-Creation-Date: 2022-07-08 13:21+0700\n"
 "PO-Revision-Date: 2022-06-20 13:36+0700\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -18,149 +18,115 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: keyboards.py:12
+#: tgbot/keyboards.py:10
 msgid "Добавить"
 msgstr "Add person"
 
-#: keyboards.py:15 keyboards.py:134
+#: tgbot/keyboards.py:13 tgbot/keyboards.py:132
 msgid "Смотреть список"
 msgstr "List of Birthdays"
 
-#: keyboards.py:18
+#: tgbot/keyboards.py:16
 msgid "Выбрать язык"
 msgstr "Set language"
 
-#: keyboards.py:28 keyboards.py:42 keyboards.py:60 keyboards.py:74
-#: keyboards.py:124
+#: tgbot/keyboards.py:26 tgbot/keyboards.py:40 tgbot/keyboards.py:58
+#: tgbot/keyboards.py:72 tgbot/keyboards.py:122
 msgid "< Назад"
 msgstr "< Back"
 
-#: keyboards.py:29 keyboards.py:43 keyboards.py:61 keyboards.py:75
-#: keyboards.py:85 keyboards.py:99 keyboards.py:125 keyboards.py:135
+#: tgbot/keyboards.py:27 tgbot/keyboards.py:41 tgbot/keyboards.py:59
+#: tgbot/keyboards.py:73 tgbot/keyboards.py:83 tgbot/keyboards.py:97
+#: tgbot/keyboards.py:123 tgbot/keyboards.py:133
 msgid "Главное меню"
 msgstr "Main menu"
 
-#: keyboards.py:39
+#: tgbot/keyboards.py:37
 msgid "Пропустить"
 msgstr "Skip"
 
-#: keyboards.py:53
+#: tgbot/keyboards.py:51
 msgid "В день рождения"
 msgstr "On birthday"
 
-#: keyboards.py:54
+#: tgbot/keyboards.py:52 tgbot/misc/notification_views.py:9
 msgid "За три дня"
 msgstr "3 days before"
 
-#: keyboards.py:57
+#: tgbot/keyboards.py:55
 msgid "Выбрать оба варинта"
 msgstr "Choose both options"
 
-#: keyboards.py:71
+#: tgbot/keyboards.py:69
 msgid "Все верно"
 msgstr "Confirm"
 
-#: keyboards.py:95
+#: tgbot/keyboards.py:93
 msgid "Удалить запись"
 msgstr "Delete person"
 
-#: keyboards.py:96
+#: tgbot/keyboards.py:94
 msgid "Редактировать запись"
 msgstr "Edit person"
 
-#: keyboards.py:119
+#: tgbot/keyboards.py:117
 msgid "Имя"
 msgstr "Name"
 
-#: keyboards.py:120
+#: tgbot/keyboards.py:118
 msgid "Дата"
 msgstr "Date"
 
-#: keyboards.py:121
+#: tgbot/keyboards.py:119
 msgid "Уведомление"
 msgstr "Reminder"
 
-#: handlers/user.py:24
-msgid "января"
-msgstr "of January"
-
-#: handlers/user.py:24
-msgid "февраля"
-msgstr "of February"
-
-#: handlers/user.py:24
-msgid "марта"
-msgstr "of March"
-
-#: handlers/user.py:24
-msgid "апреля"
-msgstr "of April"
-
-#: handlers/user.py:24
-msgid "мая"
-msgstr "of May"
-
-#: handlers/user.py:24
-msgid "июня"
-msgstr "of June"
-
-#: handlers/user.py:24
-msgid "июля"
-msgstr "of July"
-
-#: handlers/user.py:25
-msgid "августа"
-msgstr "of August"
-
-#: handlers/user.py:25
-msgid "сентября"
-msgstr "of September"
-
-#: handlers/user.py:25
-msgid "октября"
-msgstr "of October"
-
-#: handlers/user.py:25
-msgid "ноября"
-msgstr "of November"
-
-#: handlers/user.py:25
-msgid "декабря"
-msgstr "of December"
-
-#: handlers/user.py:30
+#: tgbot/scheduler.py:58
 msgid ""
-"Добро пожаловать в <b>Birthday Reminder!</b>\n"
+"Сегодня <b>{name}</b> отмечает свой <b>{age}{ending}</b> День Рождения!\n"
 "\n"
-"Добавьте человека, указав его имя и дату рождения.\n"
-"Бот напомнит Вам когда наступит его День Рождения.\n"
+"Не забудь отправить поздравление!"
 msgstr ""
-"Welcome to <b>Birthday Reminder!</b>\n"
+"Today <b>{name}</b> celebrates his/her <b>{age}{ending}</b> Birthday!\n"
 "\n"
-"Add a person specifying his name and date of birth.\n"
-"The bot will remind you when his birthday comes.\n"
+"Don't forget to send congratulations!"
 
-#: handlers/user.py:48
-msgid "Выберите удобный для Вас язык"
-msgstr "Choose a language that is convenient for you"
+#: tgbot/scheduler.py:65 tgbot/scheduler.py:78
+msgid "-й"
+msgstr "th"
 
-#: handlers/user.py:64
-msgid "Русский язык установлен"
-msgstr "English language is set"
+#: tgbot/scheduler.py:71
+msgid ""
+"Через 3 дня <b>{name}</b> будет отмечать свой <b>{age}{ending}</b> День "
+"Рождения!\n"
+"\n"
+"Не забудь приготовить подарок!"
+msgstr ""
+"After 3 days <b>{name}</b> will celebrate his/her <b>{age}{ending}</b> Birthday!\n"
+"\n"
+"Don't forget to prepare a gift!"
 
-#: handlers/user.py:72
+#: tgbot/handlers/add_person_handlers.py:21
 msgid ""
 "Введите имя человека, которого хотите добавить в список дней рождений.\n"
-"Например: <b>Олег(автосервис)</b>"
+"\n"
+"Например: <b>Олег В.</b>"
 msgstr ""
 "Enter the name of the person you want to add to the list of birthdays.\n"
-"For example: <b>Mike(plumber)</b>"
+"\n"
+"For example: <b>Mike J. Fox</b>"
 
-#: handlers/user.py:81
-msgid "Такое имя уже есть в Вашем списке. Введите, пожалуйста, уникальное имя."
-msgstr "This name is already on your list. Please enter a unique name."
+#: tgbot/handlers/add_person_handlers.py:32
+msgid ""
+"Такое имя уже есть в Вашем списке.\n"
+"\n"
+"Введите, пожалуйста, уникальное имя."
+msgstr ""
+"This name is already on your list.\n"
+"\n"
+"Please enter a unique name."
 
-#: handlers/user.py:82
+#: tgbot/handlers/add_person_handlers.py:35
 msgid ""
 "Вы ввели имя: <b>{name}</b>\n"
 "\n"
@@ -172,7 +138,7 @@ msgstr ""
 "Now enter the date and month of birth.\n"
 "For example: <b>19.01</b>"
 
-#: handlers/user.py:107
+#: tgbot/handlers/add_person_handlers.py:60
 msgid ""
 "Вы ввели имя: <b>{name}</b>\n"
 "Вы ввели дату: <b>{day} {month}</b>\n"
@@ -186,53 +152,61 @@ msgstr ""
 "Now enter the year of birth.\n"
 "For example: <b>1990</b>"
 
-#: handlers/user.py:113 handlers/user.py:396
+#: tgbot/handlers/add_person_handlers.py:66
 msgid ""
 "Вы ввели несуществующую дату.\n"
-"Введите пожалуйста число и месяц в формате <b>дд.мм</b>.\n"
+"\n"
+"Введите, пожалуйста, число и месяц в формате <b>DD.ММ</b>.\n"
 "Например <b>19.01</b>"
 msgstr ""
 "You entered a non-existent date.\n"
-"Please enter the date and month in <b>dd.mm</b> format.\n"
+"\n"
+"Please enter the day and month in <b>DD.MM</b> format.\n"
 "For example: <b>19.01</b>"
 
-#: handlers/user.py:140
+#: tgbot/handlers/add_person_handlers.py:97
 msgid ""
 "Вы ввели имя: <b>{name}</b>\n"
 "Вы ввели дату: <b>{day} {month}</b>\n"
 "Вы ввели год: <b>{year}</b>\n"
 "\n"
-"Теперь выберите когда напоминать Вам о день рождении {name}:"
+"Теперь выберите когда напоминать Вам о Дне Рождения <b>{name}</b>:"
 msgstr ""
 "You specified name: <b>{name}</b>\n"
 "You specified date: <b>{day} {month}</b>\n"
 "You specified year: <b>{year}</b>\n"
 "\n"
-"Now choose when to remind you of {name}'s birthday:"
+"Now choose when to remind you of <b>{name}'s</b> birthday:"
 
-#: handlers/user.py:146
+#: tgbot/handlers/add_person_handlers.py:103
+#: tgbot/handlers/inside_the_list/inside_editing/edit_date_handlers.py:68
 msgid ""
 "Год рождения не может быть больше текущего года.\n"
+"\n"
 "Введите корректный год рождения.\n"
 "Например: <b>1990</b>"
 msgstr ""
 "The year of birth cannot be greater than the current year.\n"
+"\n"
 "Enter the correct year of birth.\n"
 "For example: <b>1990</b>"
 
-#: handlers/user.py:150
+#: tgbot/handlers/add_person_handlers.py:108
+#: tgbot/handlers/inside_the_list/inside_editing/edit_date_handlers.py:73
 msgid ""
 "Не правильный формат ввода.\n"
-"Введите год рождения в формате <b>гггг</b>.\n"
+"\n"
+"Введите год рождения в формате <b>YYYY</b>.\n"
 "Например: <b>1990</b>"
 msgstr ""
 "The input format is not correct.\n"
-"Please enter the year in <b>yyyy</b> format.\n"
+"\n"
+"Please enter the year in <b>YYYY</b> format.\n"
 "For example: <b>1990</b>"
 
-#: handlers/user.py:186
+#: tgbot/handlers/add_person_handlers.py:147
 msgid ""
-"Давайте проверим:\n"
+"Проверьте введеные данные:\n"
 "\n"
 "Вы ввели имя: <b>{name}</b>\n"
 "Вы ввели дату: <b>{day} {month}</b>\n"
@@ -241,8 +215,8 @@ msgid ""
 "Напоминать:\n"
 "<b>{notification}</b>\n"
 "\n"
-"Нажмите кнопку 'Все верно' и я буду каждый год напоминать Вам о день "
-"рождении {name}"
+"Нажмите кнопку 'Все верно', чтобы установить ежегодное напоминание о Дне "
+"Рождения <b>{name}</b>"
 msgstr ""
 "Let's check it out:\n"
 "\n"
@@ -253,34 +227,35 @@ msgstr ""
 "Remind:\n"
 "<b>{notification}</b>\n"
 "\n"
-"Click the 'Confirm' and I will remind you about {name}'s birthday every "
-"year"
+"Click the 'Confirm' to set annual <b>{name}'s</b> birthday reminder"
 
-#: handlers/user.py:197 handlers/user.py:463
-msgid "- в День рождения в 9:00"
-msgstr "- on Birthday at 9:00"
-
-#: handlers/user.py:199 handlers/user.py:465
-msgid "- за три дня до дня рождения"
-msgstr "- 3 days before the birthday"
-
-#: handlers/user.py:201 handlers/user.py:467
-msgid ""
-"- в День рождения в 9:00\n"
-"- за 3 дня до Дня рождения"
-msgstr ""
-"- on Birthday at 9:00\n"
-"- 3 days before the birthday"
-
-#: handlers/user.py:225
+#: tgbot/handlers/add_person_handlers.py:174
 msgid "<b>Отлично! Напоминание добавлено!</b>"
 msgstr "<b>Great! Reminder added!</b>"
 
-#: handlers/user.py:241
+#: tgbot/handlers/basic_handlers.py:16
+msgid ""
+"Добро пожаловать в <b>Birthday Reminder!</b>\n"
+"\n"
+"Добавьте человека в список и бот напомнит Вам о его Дне рождения.\n"
+msgstr ""
+"Welcome to <b>Birthday Reminder!</b>\n"
+"\n"
+"Add a person to the list of birthdays and the Bot will remind you when his/her birthday comes.\n"
+
+#: tgbot/handlers/basic_handlers.py:32
+msgid "Выберите удобный для Вас язык"
+msgstr "Choose a language that is more convenient for you"
+
+#: tgbot/handlers/basic_handlers.py:48
+msgid "Русский язык установлен"
+msgstr "English language is set"
+
+#: tgbot/handlers/look_at_list_handler.py:15
 msgid "<b>Ваш список дней рождений:</b>\n"
 msgstr "<b>Your list of Birthdays:</b>\n"
 
-#: handlers/user.py:242
+#: tgbot/handlers/look_at_list_handler.py:16
 msgid ""
 "\n"
 "<b>Январь</b>\n"
@@ -288,7 +263,7 @@ msgstr ""
 "\n"
 "<b>January</b>\n"
 
-#: handlers/user.py:242
+#: tgbot/handlers/look_at_list_handler.py:16
 msgid ""
 "\n"
 "<b>Февраль</b>\n"
@@ -296,7 +271,7 @@ msgstr ""
 "\n"
 "<b>February</b>\n"
 
-#: handlers/user.py:242
+#: tgbot/handlers/look_at_list_handler.py:16
 msgid ""
 "\n"
 "<b>Март</b>\n"
@@ -304,7 +279,7 @@ msgstr ""
 "\n"
 "<b>March</b>\n"
 
-#: handlers/user.py:242
+#: tgbot/handlers/look_at_list_handler.py:16
 msgid ""
 "\n"
 "<b>Апрель</b>\n"
@@ -312,7 +287,7 @@ msgstr ""
 "\n"
 "<b>April</b>\n"
 
-#: handlers/user.py:242
+#: tgbot/handlers/look_at_list_handler.py:17
 msgid ""
 "\n"
 "<b>Май</b>\n"
@@ -320,7 +295,7 @@ msgstr ""
 "\n"
 "<b>May</b>\n"
 
-#: handlers/user.py:242
+#: tgbot/handlers/look_at_list_handler.py:17
 msgid ""
 "\n"
 "<b>Июнь</b>\n"
@@ -328,7 +303,7 @@ msgstr ""
 "\n"
 "<b>June</b>\n"
 
-#: handlers/user.py:242
+#: tgbot/handlers/look_at_list_handler.py:17
 msgid ""
 "\n"
 "<b>Июль</b>\n"
@@ -336,7 +311,7 @@ msgstr ""
 "\n"
 "<b>July</b>\n"
 
-#: handlers/user.py:242
+#: tgbot/handlers/look_at_list_handler.py:17
 msgid ""
 "\n"
 "<b>Август</b>\n"
@@ -344,7 +319,7 @@ msgstr ""
 "\n"
 "<b>August</b>\n"
 
-#: handlers/user.py:242
+#: tgbot/handlers/look_at_list_handler.py:18
 msgid ""
 "\n"
 "<b>Сентябрь</b>\n"
@@ -352,7 +327,7 @@ msgstr ""
 "\n"
 "<b>September</b>\n"
 
-#: handlers/user.py:242
+#: tgbot/handlers/look_at_list_handler.py:18
 msgid ""
 "\n"
 "<b>Октябрь</b>\n"
@@ -360,7 +335,7 @@ msgstr ""
 "\n"
 "<b>October</b>\n"
 
-#: handlers/user.py:242
+#: tgbot/handlers/look_at_list_handler.py:18
 msgid ""
 "\n"
 "<b>Ноябрь</b>\n"
@@ -368,7 +343,7 @@ msgstr ""
 "\n"
 "<b>November</b>\n"
 
-#: handlers/user.py:242
+#: tgbot/handlers/look_at_list_handler.py:18
 msgid ""
 "\n"
 "<b>Декабрь</b>\n"
@@ -376,7 +351,7 @@ msgstr ""
 "\n"
 "<b>December</b>\n"
 
-#: handlers/user.py:243
+#: tgbot/handlers/look_at_list_handler.py:19
 msgid ""
 "\n"
 "<i>*Кликните по имени, чтобы скопировать</i>"
@@ -384,11 +359,11 @@ msgstr ""
 "\n"
 "<i>*Tap on a name to copy</i>"
 
-#: handlers/user.py:273
+#: tgbot/handlers/inside_the_list/del_person_handlers.py:18
 msgid "Введите имя человека, которого хотите удалить из списка"
 msgstr "Enter the person's name you want to delete from the list of birthdays"
 
-#: handlers/user.py:282
+#: tgbot/handlers/inside_the_list/del_person_handlers.py:27
 msgid ""
 "Вы действительно хотите удалить запись со следующими данными:\n"
 "\n"
@@ -396,21 +371,20 @@ msgstr ""
 "Are you sure you want to delete the person:\n"
 "\n"
 
-#: handlers/user.py:284 handlers/user.py:327
-msgid ""
-"Такого имени нет в списке, проверьте правильность написания и введите имя"
-" еще раз:"
-msgstr "This name is not in the list, check the spelling and enter the name again:"
+#: tgbot/handlers/inside_the_list/del_person_handlers.py:29
+#: tgbot/handlers/inside_the_list/edit_person_handlers.py:28
+msgid "Такого имени нет в списке, проверьте правильность написания и введите имя еще раз."
+msgstr "This name is not in the list, check the spelling and enter the name once again:"
 
-#: handlers/user.py:304
+#: tgbot/handlers/inside_the_list/del_person_handlers.py:47
 msgid "Напоминание о День рождении <b>{name}</b> удалено."
 msgstr "<b>{name}</b>'s birthday reminder deleted."
 
-#: handlers/user.py:316
+#: tgbot/handlers/inside_the_list/edit_person_handlers.py:17
 msgid "Введите имя человека, данные которого вы хотите отредактировать"
-msgstr "Enter the name of the person you want to edit"
+msgstr "Enter the the person's name you want to edit"
 
-#: handlers/user.py:325
+#: tgbot/handlers/inside_the_list/edit_person_handlers.py:26
 msgid ""
 "Вы выбрали запись:\n"
 "\n"
@@ -418,37 +392,19 @@ msgstr ""
 "You have chosen:\n"
 "\n"
 
-#: handlers/user.py:328
+#: tgbot/handlers/inside_the_list/edit_person_handlers.py:29
 msgid "Выберите какие данные Вы хотели бы изменить:"
 msgstr "Choose what you'd like to change:"
 
-#: handlers/user.py:357
-msgid "Введите новое имя"
-msgstr "Enter a new name"
-
-#: handlers/user.py:366
-msgid ""
-"Вы действительно хотите изменить имя <b>{old_name}</b> на имя "
-"<b>{new_name}</b>?\n"
-"\n"
-msgstr ""
-"Are you sure you want to change the name <b>{old_name}</b> to the name "
-"<b>{new_name}</b>?\n"
-"\n"
-
-#: handlers/user.py:368
-msgid "Такое имя уже есть в Вашем списке. Введите уникальное имя."
-msgstr "This name is already on your list. Please enter a unique name."
-
-#: handlers/user.py:382
+#: tgbot/handlers/inside_the_list/inside_editing/edit_date_handlers.py:19
 msgid ""
 "Введите новые число и месяц.\n"
 "Например: <b>19.01</b>"
 msgstr ""
-"Enter a new date and a new month of birth.\n"
+"Enter a new day and a new month of birth.\n"
 "For example: <b>19.01</b>"
 
-#: handlers/user.py:391
+#: tgbot/handlers/inside_the_list/inside_editing/edit_date_handlers.py:29
 msgid ""
 "Вы ввели новую дату: <b>{new_day} {new_month}</b>\n"
 "\n"
@@ -460,47 +416,151 @@ msgstr ""
 "Now enter a new year of birth.\n"
 "For example: <b>1990</b>"
 
-#: handlers/user.py:420
+#: tgbot/handlers/inside_the_list/inside_editing/edit_date_handlers.py:33
 msgid ""
-"Вы действительно хотите изменить дату рождения <b>{old_name}</b> на "
+"Вы ввели несуществующую дату.\n"
+"\n"
+"Введите пожалуйста число и месяц в формате <b>DD.MM</b>.\n"
+"Например <b>19.01</b>"
+msgstr ""
+"You entered a non-existent date.\n"
+"\n"
+"Please enter the date and month in <b>DD.MM</b> format.\n"
+"For example: <b>19.01</b>"
+
+#: tgbot/handlers/inside_the_list/inside_editing/edit_date_handlers.py:63
+msgid ""
+"Вы действительно хотите изменить День Рождения <b>{name}</b> на "
 "<b>{new_day}.{new_month}.{new_year}</b>?\n"
 "\n"
 msgstr ""
-"Are you sure you want to change the <b>{old_name}</b>'s date of birth to "
+"Are you sure you want to change the <b>{name}</b>'s date of birth to "
 "<b>{new_day}.{new_month}.{new_year}</b>?\n"
 "\n"
 
-#: handlers/user.py:422
+#: tgbot/handlers/inside_the_list/inside_editing/edit_date_handlers.py:66
 msgid ""
-"Вы действительно хотите изменить дату рождения <b>{old_name}</b> на "
+"Вы действительно хотите изменить День Рождения <b>{name}</b> на "
 "<b>{new_day}.{new_month}</b>?\n"
 "\n"
 msgstr ""
-"Are you sure you want to change the <b>{old_name}</b>'s date of birth to "
+"Are you sure you want to change the <b>{name}</b>'s date of birth to "
 "<b>{new_day}.{new_month}</b>?\n"
 "\n"
 
-#: handlers/user.py:447
-msgid "Выберите когда напоминать Вам о день рождении {old_name}:"
-msgstr "Choose when to remind you of the {old_name}'s Birthday:"
-
-#: handlers/user.py:458
-msgid ""
-"Теперь бот будет напоминать Вам о день рождении <b>{old_name}</b>:\n"
-"<b>{notification}</b>\n"
-"\n"
-"\n"
-"Нажмите кнопку 'Все верно', чтобы сохранить данные изменения."
-msgstr ""
-"Now the bot will remind you of the<b>{old_name}</b>'s Birthday:\n"
-"<b>{notification}</b>\n"
-"\n"
-"\n"
-"Tap 'Confirm' to complete changes."
-
-#: handlers/user.py:489 handlers/user.py:502 handlers/user.py:516
+#: tgbot/handlers/inside_the_list/inside_editing/edit_date_handlers.py:107
+#: tgbot/handlers/inside_the_list/inside_editing/edit_name_handlers.py:42
+#: tgbot/handlers/inside_the_list/inside_editing/edit_notification_handlers.py:44
 msgid "<b>Изменения успешно внесены</b>"
-msgstr "Changes saved"
+msgstr "Change saved"
+
+#: tgbot/handlers/inside_the_list/inside_editing/edit_name_handlers.py:16
+msgid "Введите новое имя"
+msgstr "Enter a new name"
+
+#: tgbot/handlers/inside_the_list/inside_editing/edit_name_handlers.py:25
+msgid ""
+"Вы действительно хотите изменить имя <b>{name}</b> на имя "
+"<b>{new_name}</b>?\n"
+"\n"
+msgstr ""
+"Are you sure you want to change the name <b>{name}</b> to the name "
+"<b>{new_name}</b>?\n"
+"\n"
+
+#: tgbot/handlers/inside_the_list/inside_editing/edit_name_handlers.py:27
+msgid "Такое имя уже есть в Вашем списке. Введите уникальное имя."
+msgstr "This name is already on your list. Please enter a unique name."
+
+#: tgbot/handlers/inside_the_list/inside_editing/edit_notification_handlers.py:17
+msgid "Выберите когда напоминать Вам о Дне рождения <b>{name}</b>:"
+msgstr "Choose when to remind you of the {name}'s Birthday:"
+
+#: tgbot/handlers/inside_the_list/inside_editing/edit_notification_handlers.py:28
+msgid ""
+"Теперь бот будет напоминать Вам о день рождении <b>{name}</b>:\n"
+"\n"
+"<b>{notification}</b>\n"
+"\n"
+"Нажмите кнопку 'Все верно', чтобы сохранить изменения."
+msgstr ""
+"Now the bot will remind you of the<b>{name}</b>'s Birthday:\n"
+"\n"
+"<b>{notification}</b>\n"
+"\n"
+"Tap 'Confirm' to save the change."
+
+#: tgbot/misc/notification_views.py:7
+msgid "В день"
+msgstr "On day"
+
+#: tgbot/misc/notification_views.py:11
+msgid "Оба варианта"
+msgstr "Both options"
+
+#: tgbot/misc/notification_views.py:18
+msgid "- в День рождения"
+msgstr "- On Birthday"
+
+#: tgbot/misc/notification_views.py:20
+msgid "- за 3 дня до Дня рождения"
+msgstr "- 3 days before the Birthday"
+
+#: tgbot/misc/notification_views.py:22
+msgid ""
+"- в День рождения\n"
+"- за 3 дня до Дня рождения"
+msgstr ""
+"- on Birthday\n"
+"- 3 days before the Birthday"
+
+#: tgbot/misc/numbers_to_months.py:7
+msgid "января"
+msgstr "of January"
+
+#: tgbot/misc/numbers_to_months.py:8
+msgid "февраля"
+msgstr "of February"
+
+#: tgbot/misc/numbers_to_months.py:9
+msgid "марта"
+msgstr "of March"
+
+#: tgbot/misc/numbers_to_months.py:10
+msgid "апреля"
+msgstr "of April"
+
+#: tgbot/misc/numbers_to_months.py:11
+msgid "мая"
+msgstr "of May"
+
+#: tgbot/misc/numbers_to_months.py:12
+msgid "июня"
+msgstr "of June"
+
+#: tgbot/misc/numbers_to_months.py:13
+msgid "июля"
+msgstr "of July"
+
+#: tgbot/misc/numbers_to_months.py:14
+msgid "августа"
+msgstr "of August"
+
+#: tgbot/misc/numbers_to_months.py:15
+msgid "сентября"
+msgstr "of September"
+
+#: tgbot/misc/numbers_to_months.py:16
+msgid "октября"
+msgstr "of October"
+
+#: tgbot/misc/numbers_to_months.py:17
+msgid "ноября"
+msgstr "of November"
+
+#: tgbot/misc/numbers_to_months.py:18
+msgid "декабря"
+msgstr "of December"
 
 #~ msgid "Both options"
 #~ msgstr "Both options"
@@ -511,4 +571,21 @@ msgstr "Changes saved"
 #~ msgstr ""
 #~ "<b>Great! Reminder added!\n"
 #~ "</b>"
+
+#~ msgid "- в День рождения"
+#~ msgstr "- on Birthday"
+
+#~ msgid ""
+#~ "Сегодня <b>{name}</b> отмечает свой "
+#~ "<b>{age}{ending}</b> День Рождения!\n"
+#~ "\n"
+#~ "Не забывай поздравлять важных тебе людей"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Через 3 дня <b>{name}</b> будет отмечать"
+#~ " свой <b>{age}{ending}</b> День Рождения!\n"
+#~ "\n"
+#~ "Не забывай поздравлять важных тебе людей"
+#~ msgstr ""
 

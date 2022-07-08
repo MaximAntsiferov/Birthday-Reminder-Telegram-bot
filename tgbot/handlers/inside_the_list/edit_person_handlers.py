@@ -25,7 +25,7 @@ async def edit_person_handler(call: CallbackQuery):
 async def what_to_edit_handler(target: Union[Message, CallbackQuery], state: FSMContext):
     text = _("Вы выбрали запись:\n"
              "\n")
-    text2 = _("Такого имени нет в списке, проверьте правильность написания и введите имя еще раз:")
+    text2 = _("Такого имени нет в списке, проверьте правильность написания и введите имя еще раз.")
     text3 = _("Выберите какие данные Вы хотели бы изменить:")
 
     user_id = target.from_user.id

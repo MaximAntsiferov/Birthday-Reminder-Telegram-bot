@@ -23,10 +23,11 @@ async def tasks_on_startup(scheduler: AsyncIOScheduler, bot: Bot):
                                user_id=user_id, notification=notification)
 
 
-async def add_to_scheduler(scheduler: AsyncIOScheduler, bot: Bot, name: str, day: str, month: str, year: str,
+async def add_to_scheduler(scheduler: AsyncIOScheduler, bot: Bot, name: str, day: str, month: str, year: Optional[str],
                            user_id: int, notification: str):
     day = int(day)
     month = int(month)
+    year = int(year) if year is not None else None
 
     if notification == "on_date":
         scheduler.add_job(add_onday_reminder, "cron", month=month, day=day, hour=9, minute=0,
@@ -55,20 +56,28 @@ async def calculate_3days_before(day: int, month: int):
 
 async def add_onday_reminder(bot: Bot, name: str, year: int, user_id: int):
     text = _("Сегодня <b>{name}</b> отмечает свой <b>{age}{ending}</b> День Рождения!\n\n"
-             "Не забывай поздравлять важных тебе людей")
+             "Не забудь отправить поздравление!")
 
-    ending = _("-й") if year is not None else _("")
-    age = date.today().year - year
+    if year is None:
+        ending = ""
+        age = ""
+    else:
+        ending = _("-й")
+        age = date.today().year - year
     await bot.send_message(text=text.format(name=name, age=age, ending=ending), chat_id=user_id)
 
 
 async def add_3daysbefore_reminder(bot: Bot, name: str, year: int, user_id: int):
     text = _("Через 3 дня <b>{name}</b> будет отмечать свой <b>{age}{ending}</b> День Рождения!\n\n"
-             "Не забывай поздравлять важных тебе людей")
+             "Не забудь приготовить подарок!")
 
-    ending = _("-й") if year is not None else _("")
-    birthday = date.today() + timedelta(days=3)
-    age = birthday.year - int(year)
+    if year is None:
+        ending = ""
+        age = ""
+    else:
+        ending = _("-й")
+        birthday = date.today() + timedelta(days=3)
+        age = birthday.year - int(year)
     await bot.send_message(text=text.format(name=name, age=age, ending=ending), chat_id=user_id)
 
 
@@ -111,7 +120,7 @@ async def modify_date(scheduler: AsyncIOScheduler, new_day: str, new_month: str,
 
 
 async def modify_notification(scheduler: AsyncIOScheduler, bot: Bot, notification: str, user_id: str, name: str,
-                              year: int, month: int, day: int, onday_id: str, before_id: str):
+                              year: Optional[int], month: int, day: int, onday_id: str, before_id: str):
 
     if notification == "on_date":
         if onday_id is None:
