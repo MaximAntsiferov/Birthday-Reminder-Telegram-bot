@@ -25,7 +25,7 @@ async def tasks_on_startup(scheduler: ContextSchedulerDecorator, bot: Bot):
         scheduler.ctx.add_instance(bot, declared_class=Bot)
         scheduler.ctx.add_instance(name, declared_class=str)
         scheduler.ctx.add_instance(year, declared_class=int)
-        scheduler.ctx.add_instance(user_id, declared_class=int)
+        scheduler.ctx.add_instance(user_id, declared_class=float)
         await add_to_scheduler(scheduler=scheduler, bot=bot, name=name, day=day, month=month, year=year,
                                user_id=user_id, notification=notification)
 
