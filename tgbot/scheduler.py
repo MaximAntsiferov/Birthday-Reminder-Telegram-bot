@@ -10,18 +10,23 @@ from tgbot.middlewares.language_middleware import _
 
 # Добавляем все ранее созданные задания из БД в планировщик
 async def tasks_on_startup(scheduler: ContextSchedulerDecorator):
-    connection = await connection_to_db()
-    values = await connection.fetch(f"SELECT * FROM birthdays")
-    await close_connection(connection)
-    for data in values:
-        user_id = data["user_id"]
-        name = data["name"]
-        year = data["year"]
-        month = data["month"]
-        day = data["day"]
-        notification = data["notification"]
-        await add_to_scheduler(scheduler=scheduler, name=name, day=day, month=month, year=year,
-                               user_id=user_id, notification=notification)
+    jobs = scheduler.get_jobs()
+    if len(jobs) == 0:
+        connection = await connection_to_db()
+        values = await connection.fetch(f"SELECT * FROM birthdays")
+        await close_connection(connection)
+        for data in values:
+            user_id = data["user_id"]
+            name = data["name"]
+            year = data["year"]
+            month = data["month"]
+            day = data["day"]
+            notification = data["notification"]
+            await add_to_scheduler(scheduler=scheduler, name=name, day=day, month=month, year=year,
+                                   user_id=user_id, notification=notification)
+    else:
+        print(jobs)
+        return
 
 
 async def add_to_scheduler(scheduler: ContextSchedulerDecorator, name: str, day: str, month: str, year: Optional[str],
