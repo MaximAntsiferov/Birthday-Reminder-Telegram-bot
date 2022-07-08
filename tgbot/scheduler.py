@@ -33,17 +33,17 @@ async def add_to_scheduler(scheduler: AsyncIOScheduler, bot: Bot, name: str, day
 
     if notification == "on_date":
         scheduler.add_job(add_onday_reminder, "cron", month=month, day=day, hour=9, minute=0,
-                          args=[bot, name, year, user_id], name=f"onday_{user_id}_{name}")
+                          args=[name, year, user_id], name=f"onday_{user_id}_{name}")
     elif notification == "three_days_before":
         day, month = await calculate_3days_before(day=day, month=month)
         scheduler.add_job(add_3daysbefore_reminder, "cron", month=month, day=day, hour=9, minute=0,
-                          args=[bot, name, year, user_id], name=f"before_{user_id}_{name}")
+                          args=[name, year, user_id], name=f"before_{user_id}_{name}")
     elif notification == "both_variants":
         scheduler.add_job(add_onday_reminder, "cron", month=month, day=day, hour=9, minute=0,
-                          args=[bot, name, year, user_id], name=f"onday_{user_id}_{name}")
+                          args=[name, year, user_id], name=f"onday_{user_id}_{name}")
         day, month = await calculate_3days_before(day=day, month=month)
         scheduler.add_job(add_3daysbefore_reminder, "cron", month=month, day=day, hour=9, minute=0,
-                          args=[bot, name, year, user_id], name=f"before_{user_id}_{name}")
+                          args=[name, year, user_id], name=f"before_{user_id}_{name}")
     else:
         return
 
@@ -127,7 +127,7 @@ async def modify_notification(scheduler: AsyncIOScheduler, bot: Bot, notificatio
     if notification == "on_date":
         if onday_id is None:
             scheduler.add_job(add_onday_reminder, "cron", month=month, day=day, hour=9, minute=0,
-                              args=[bot, name, year, user_id], name=f"onday_{user_id}_{name}")
+                              args=[name, year, user_id], name=f"onday_{user_id}_{name}")
         if before_id is not None:
             scheduler.remove_job(job_id=before_id)
 
@@ -135,15 +135,15 @@ async def modify_notification(scheduler: AsyncIOScheduler, bot: Bot, notificatio
         if before_id is None:
             day, month = await calculate_3days_before(day=day, month=month)
             scheduler.add_job(add_3daysbefore_reminder, "cron", month=month, day=day, hour=9, minute=0,
-                              args=[bot, name, year, user_id], name=f"before_{user_id}_{name}")
+                              args=[name, year, user_id], name=f"before_{user_id}_{name}")
         if onday_id is not None:
             scheduler.remove_job(job_id=onday_id)
 
     elif notification == "both_variants":
         if onday_id is None:
             scheduler.add_job(add_onday_reminder, "cron", month=month, day=day, hour=9, minute=0,
-                              args=[bot, name, year, user_id], name=f"onday_{user_id}_{name}")
+                              args=[name, year, user_id], name=f"onday_{user_id}_{name}")
         if before_id is None:
             day, month = await calculate_3days_before(day=day, month=month)
             scheduler.add_job(add_3daysbefore_reminder, "cron", month=month, day=day, hour=9, minute=0,
-                              args=[bot, name, year, user_id], name=f"before_{user_id}_{name}")
+                              args=[name, year, user_id], name=f"before_{user_id}_{name}")

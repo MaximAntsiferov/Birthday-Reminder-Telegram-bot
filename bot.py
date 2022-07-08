@@ -62,7 +62,7 @@ async def main():
     }
 
     scheduler = ContextSchedulerDecorator(AsyncIOScheduler(jobstores=job_stores))
-    scheduler.ctx.add_instance(Bot(token=BOT_TOKEN, parse_mode='HTML'), Bot)
+    scheduler.ctx.add_instance(bot, Bot)
 
     register_all_filters(dp)
     register_all_handlers(dp)
