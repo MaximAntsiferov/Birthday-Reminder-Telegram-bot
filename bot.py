@@ -1,9 +1,11 @@
 import asyncio
 import logging
+from typing import Dict
 
 from aiogram import Bot, Dispatcher
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.contrib.fsm_storage.redis import RedisStorage2
+from apscheduler.jobstores.redis import RedisJobStore
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler_di import ContextSchedulerDecorator
 
@@ -52,10 +54,15 @@ async def main():
     storage = RedisStorage2() if USE_REDIS else MemoryStorage()
     bot = Bot(token=BOT_TOKEN, parse_mode='HTML')
     dp = Dispatcher(bot, storage=storage)
-    scheduler = ContextSchedulerDecorator(AsyncIOScheduler())
-    scheduler.add_jobstore('redis', jobs_key='birthdays_jobs', run_times_key='birthdays_run_times')
-    scheduler.ctx.add_instance(bot, Bot)
 
+    job_stores: Dict[str, RedisJobStore] = {
+        "default": RedisJobStore(
+            jobs_key="birthdays_jobs", run_times_key="birthdays_run_times"
+        )
+    }
+
+    scheduler = ContextSchedulerDecorator(AsyncIOScheduler(jobstores=job_stores))
+    scheduler.ctx.add_instance(bot, Bot)
 
     register_all_filters(dp)
     register_all_handlers(dp)
