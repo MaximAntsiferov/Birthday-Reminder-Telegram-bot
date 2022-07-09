@@ -1,7 +1,7 @@
 from tgbot.middlewares.language_middleware import _
 
 
-# Функция определяет как будут выглядеть короткие и длинные варианты типов напоминаний
+# Функция определяет как будет выглядеть длинный вариант типов напоминаний
 async def short_notification(notification: str) -> str:
     if notification == "on_date":
         return _("В день")
@@ -13,6 +13,7 @@ async def short_notification(notification: str) -> str:
         return
 
 
+# Функция определяет как будет выглядеть короткий вариант типов напоминаний
 async def long_notification(notification: str) -> str:
     if notification == "on_date":
         return _("- в День рождения")
