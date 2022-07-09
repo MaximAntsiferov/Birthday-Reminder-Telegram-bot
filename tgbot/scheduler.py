@@ -8,7 +8,7 @@ from tgbot.db import connection_to_db, close_connection
 from tgbot.middlewares.language_middleware import _
 
 
-# Добавляем все ранее созданные задания из БД в планировщик
+# Добавляем все ранее созданные задания из БД в планировщик, если список заданий пуст
 async def tasks_on_startup(scheduler: ContextSchedulerDecorator):
     jobs = scheduler.get_jobs()
     if len(jobs) == 0:
@@ -28,6 +28,7 @@ async def tasks_on_startup(scheduler: ContextSchedulerDecorator):
         return
 
 
+# Добавляем новые задания в планировщик
 async def add_to_scheduler(scheduler: ContextSchedulerDecorator, name: str, day: str, month: str, year: Optional[str],
                            user_id: int, notification: str):
     day = int(day)
@@ -36,21 +37,26 @@ async def add_to_scheduler(scheduler: ContextSchedulerDecorator, name: str, day:
 
     if notification == "on_date":
         scheduler.add_job(add_onday_reminder, "cron", month=month, day=day, hour=9, minute=0,
-                          kwargs={"name": name, "year": year, "user_id": user_id}, name=f"onday_{user_id}_{name}")
+                          kwargs={"name": name, "day": day, "month": month, "year": year, "user_id": user_id},
+                          name=f"onday_{user_id}_{name}")
     elif notification == "three_days_before":
         day, month = await calculate_3days_before(day=day, month=month)
         scheduler.add_job(add_3daysbefore_reminder, "cron", month=month, day=day, hour=9, minute=0,
-                          kwargs={"name": name, "year": year, "user_id": user_id}, name=f"before_{user_id}_{name}")
+                          kwargs={"name": name, "day": day, "month": month, "year": year, "user_id": user_id},
+                          name=f"before_{user_id}_{name}")
     elif notification == "both_variants":
         scheduler.add_job(add_onday_reminder, "cron", month=month, day=day, hour=9, minute=0,
-                          kwargs={"name": name, "year": year, "user_id": user_id}, name=f"onday_{user_id}_{name}")
+                          kwargs={"name": name, "day": day, "month": month, "year": year, "user_id": user_id},
+                          name=f"onday_{user_id}_{name}")
         day, month = await calculate_3days_before(day=day, month=month)
         scheduler.add_job(add_3daysbefore_reminder, "cron", month=month, day=day, hour=9, minute=0,
-                          kwargs={"name": name, "year": year, "user_id": user_id}, name=f"before_{user_id}_{name}")
+                          kwargs={"name": name, "day": day, "month": month, "year": year, "user_id": user_id},
+                          name=f"before_{user_id}_{name}")
     else:
         return
 
 
+# Вычисляем какой день и месяц будут за 3 дня до Дня рождения
 async def calculate_3days_before(day: int, month: int):
     if day - 3 <= 0:
         calculated_date = date(date.today().year, month, day) - timedelta(days=3)
@@ -61,7 +67,23 @@ async def calculate_3days_before(day: int, month: int):
     return day, month
 
 
-async def add_onday_reminder(bot: Bot, name: str, year: int, user_id: int):
+# Вычисляем сколько лет исполнится человеку в ближайший День рождения
+async def calculate_coming_age(day: int, month: int, year: int, shift: int) -> int:
+    ref_point = date.today() + timedelta(days=shift)
+    person_years = ref_point.year - year
+    person_months = ref_point.month - month
+    person_days = ref_point.day - day
+    if person_months < 0:
+        age = person_years
+    elif person_months == 0 and person_days < 0:
+        age = person_years
+    else:
+        age = person_years + 1
+    return age
+
+
+# Напоминание срабатывающее в День рождения
+async def add_onday_reminder(bot: Bot, name: str, day: int, month: int, year: Optional[int], user_id: int):
     text = _("Сегодня <b>{name}</b> отмечает свой <b>{age}{ending}</b> День Рождения!\n\n"
              "Не забудь отправить поздравление!")
 
@@ -70,11 +92,12 @@ async def add_onday_reminder(bot: Bot, name: str, year: int, user_id: int):
         age = ""
     else:
         ending = _("-й")
-        age = date.today().year - year
+        age = calculate_coming_age(day=day, month=month, year=year, shift=0)
     await bot.send_message(text=text.format(name=name, age=age, ending=ending), chat_id=user_id)
 
 
-async def add_3daysbefore_reminder(bot: Bot, name: str, year: int, user_id: int):
+# Напоминание срабатывающее за 3 дня до Дня рождения
+async def add_3daysbefore_reminder(bot: Bot, name: str, day: int, month: int, year: Optional[int], user_id: int):
     text = _("Через 3 дня <b>{name}</b> будет отмечать свой <b>{age}{ending}</b> День Рождения!\n\n"
              "Не забудь приготовить подарок!")
 
@@ -83,12 +106,12 @@ async def add_3daysbefore_reminder(bot: Bot, name: str, year: int, user_id: int)
         age = ""
     else:
         ending = _("-й")
-        birthday = date.today() + timedelta(days=3)
-        age = birthday.year - int(year)
+        age = calculate_coming_age(day=day, month=month, year=year, shift=3)
     await bot.send_message(text=text.format(name=name, age=age, ending=ending), chat_id=user_id)
 
 
-async def del_from_scheduler(scheduler: ContextSchedulerDecorator, onday_id: str, before_id: str):
+# Удаляем задание из планировщика
+async def del_from_scheduler(scheduler: ContextSchedulerDecorator, onday_id: Optional[str], before_id: Optional[str]):
     if onday_id is not None:
         scheduler.remove_job(job_id=onday_id)
     if before_id is not None:
@@ -96,6 +119,7 @@ async def del_from_scheduler(scheduler: ContextSchedulerDecorator, onday_id: str
     return
 
 
+# Получаем ID задания в планировщике по имени задания
 async def get_id_by_name(scheduler: ContextSchedulerDecorator, user_id: int, name: str):
     list_of_all_jobs = scheduler.get_jobs()
     onday_id = None
@@ -108,7 +132,9 @@ async def get_id_by_name(scheduler: ContextSchedulerDecorator, user_id: int, nam
     return onday_id, before_id
 
 
-async def modify_name(scheduler: ContextSchedulerDecorator, user_id: int, new_name: str, onday_id: str, before_id: str):
+# Изменяем имя задания в планировщике
+async def modify_name(scheduler: ContextSchedulerDecorator, user_id: int, new_name: str, onday_id: Optional[str],
+                      before_id: Optional[str]):
     if onday_id is not None:
         scheduler.modify_job(job_id=onday_id, name=f"onday_{user_id}_{new_name}")
     if before_id is not None:
@@ -116,7 +142,9 @@ async def modify_name(scheduler: ContextSchedulerDecorator, user_id: int, new_na
     return
 
 
-async def modify_date(scheduler: ContextSchedulerDecorator, new_day: str, new_month: str, onday_id: str, before_id: str):
+# Изменяем дату срабатывания задания в планировщике
+async def modify_date(scheduler: ContextSchedulerDecorator, new_day: str, new_month: str, onday_id: Optional[str],
+                      before_id: Optional[str]):
     new_day = int(new_day)
     new_month = int(new_month)
     if onday_id is not None:
@@ -126,13 +154,15 @@ async def modify_date(scheduler: ContextSchedulerDecorator, new_day: str, new_mo
         scheduler.reschedule_job(job_id=before_id, trigger="cron", month=new_month, day=new_day, hour=9, minute=0)
 
 
+# Изменяем тип напоминания задания в планировщике
 async def modify_notification(scheduler: ContextSchedulerDecorator, notification: str, user_id: int, name: str,
-                              year: Optional[int], month: int, day: int, onday_id: str, before_id: str):
-
+                              year: Optional[int], month: int, day: int, onday_id: Optional[str],
+                              before_id: Optional[str]):
     if notification == "on_date":
         if onday_id is None:
             scheduler.add_job(add_onday_reminder, "cron", month=month, day=day, hour=9, minute=0,
-                              kwargs={"name": name, "year": year, "user_id": user_id}, name=f"onday_{user_id}_{name}")
+                              kwargs={"name": name, "day": day, "month": month, "year": year, "user_id": user_id},
+                              name=f"onday_{user_id}_{name}")
         if before_id is not None:
             scheduler.remove_job(job_id=before_id)
 
@@ -140,15 +170,18 @@ async def modify_notification(scheduler: ContextSchedulerDecorator, notification
         if before_id is None:
             day, month = await calculate_3days_before(day=day, month=month)
             scheduler.add_job(add_3daysbefore_reminder, "cron", month=month, day=day, hour=9, minute=0,
-                              kwargs={"name": name, "year": year, "user_id": user_id}, name=f"before_{user_id}_{name}")
+                              kwargs={"name": name, "day": day, "month": month, "year": year, "user_id": user_id},
+                              name=f"before_{user_id}_{name}")
         if onday_id is not None:
             scheduler.remove_job(job_id=onday_id)
 
     elif notification == "both_variants":
         if onday_id is None:
             scheduler.add_job(add_onday_reminder, "cron", month=month, day=day, hour=9, minute=0,
-                              kwargs={"name": name, "year": year, "user_id": user_id}, name=f"onday_{user_id}_{name}")
+                              kwargs={"name": name, "day": day, "month": month, "year": year, "user_id": user_id},
+                              name=f"onday_{user_id}_{name}")
         if before_id is None:
             day, month = await calculate_3days_before(day=day, month=month)
             scheduler.add_job(add_3daysbefore_reminder, "cron", month=month, day=day, hour=9, minute=0,
-                              kwargs={"name": name, "year": year, "user_id": user_id}, name=f"before_{user_id}_{name}")
+                              kwargs={"name": name, "day": day, "month": month, "year": year, "user_id": user_id},
+                              name=f"before_{user_id}_{name}")
