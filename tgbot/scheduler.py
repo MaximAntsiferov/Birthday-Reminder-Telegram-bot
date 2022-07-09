@@ -56,6 +56,8 @@ async def calculate_3days_before(day: int, month: int):
         calculated_date = date(date.today().year, month, day) - timedelta(days=3)
         day = calculated_date.day
         month = calculated_date.month
+    else:
+        day = day - 3
     return day, month
 
 
