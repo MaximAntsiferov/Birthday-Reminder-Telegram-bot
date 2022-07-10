@@ -92,7 +92,7 @@ async def add_onday_reminder(bot: Bot, name: str, day: int, month: int, year: Op
         age = ""
     else:
         ending = _("-й")
-        age = calculate_coming_age(day=day, month=month, year=year, shift=0)
+        age = await calculate_coming_age(day=day, month=month, year=year, shift=0)
     await bot.send_message(text=text.format(name=name, age=age, ending=ending), chat_id=user_id)
 
 
@@ -106,7 +106,7 @@ async def add_3daysbefore_reminder(bot: Bot, name: str, day: int, month: int, ye
         age = ""
     else:
         ending = _("-й")
-        age = calculate_coming_age(day=day, month=month, year=year, shift=3)
+        age = await calculate_coming_age(day=day, month=month, year=year, shift=3)
     await bot.send_message(text=text.format(name=name, age=age, ending=ending), chat_id=user_id)
 
 
