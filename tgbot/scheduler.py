@@ -107,6 +107,7 @@ async def add_3daysbefore_reminder(bot: Bot, name: str, day: int, month: int, ye
     else:
         ending = _("-й")
         age = await calculate_coming_age(day=day, month=month, year=year, shift=3)
+
     await bot.send_message(text=text.format(name=name, age=age, ending=ending), chat_id=user_id)
 
 
